@@ -1,0 +1,25 @@
+{
+  "name": "places",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Egor-Sapronov/places.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Egor-Sapronov/places/issues"
+  },
+  "homepage": "https://github.com/Egor-Sapronov/places#readme",
+  "dependencies": {
+    "express": "^4.13.3",
+    "pg": "^4.4.1",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^3.6.0"
+  }
+}
