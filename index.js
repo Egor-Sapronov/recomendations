@@ -3,7 +3,7 @@
 let express = require('express');
 let app = express();
 let Sequelize = require('sequelize');
-let sequelize = new Sequelize(process.env.POSTGRE_URL, { logging: false });
+let sequelize = new Sequelize(process.env.DATABASE_URL, { logging: false });
 
 app.get('/', function (req, res) {
 	res.send('Hello');
