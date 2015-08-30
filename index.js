@@ -1,8 +1,14 @@
-/* global process */
 'use strict';
 
 let app = require('./app');
+let db = require('./libs/database');
 
-app.listen(process.env.PORT || 3000, function () {
-	console.log(`Listen port ${process.env.PORT}`)
-});
+db
+	.sequelize
+	.sync({ force: true })
+	.then(function () {
+		app.listen(process.env.PORT || 3000, function () {
+			console.log(`Listen port ${process.env.PORT}`)
+		});
+	});
+
