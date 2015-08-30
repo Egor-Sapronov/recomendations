@@ -11,4 +11,8 @@ app.get('/', function (req, res) {
 	res.render('index');
 });
 
+app.get('/signin', function (req, res) {
+	res.render('signin');
+});
+
 module.exports = app;
