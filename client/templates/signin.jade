@@ -8,15 +8,15 @@ block main
 		.mdl-cell.mdl-cell--4-col
 		.mdl-cell.mdl-cell--4-col
 			h1.display-4 Signin
-			form
+			form(action='/signin', method='POST')
 				.mdl-grid.mdl-grid--no-spacing
 					.mdl-cell.mdl-cell--12-col
 						.mdl-textfield.mdl-js-textfield.mdl-textfield--wide
-							input#email_input.mdl-textfield__input(type='text')
+							input#email_input.mdl-textfield__input(type='text', name='username')
 							label.mdl-textfield__label(for='email_input') Email
 					.mdl-cell.mdl-cell--12-col
 						.mdl-textfield.mdl-js-textfield.mdl-textfield--wide
-							input#password_input.mdl-textfield__input(type='password')
+							input#password_input.mdl-textfield__input(type='password', name='password')
 							label.mdl-textfield__label(for='password_input') Password
 					.mdl-cell.mdl-cell--12-col
 						button.mdl-button.mdl-js-button.mdl-button--raised.mdl-button--colored Signin

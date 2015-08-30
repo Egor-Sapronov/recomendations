@@ -11,7 +11,11 @@ module.exports = (function () {
 				email: email
 			})
 			.then(function (user) {
-				if (!user.checkPassword(password) || !user) {
+				if (!user) {
+					return done(null, false);
+				}
+
+				if (!user.checkPassword(password)) {
 					return done(null, false);
 				}
 
