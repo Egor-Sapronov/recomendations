@@ -5,16 +5,42 @@ let expect = require('chai').expect;
 let env = require('node-env-file');
 env(__dirname + '/../.env');
 
-describe('User model', function () {
+describe('Token model', function () {
 	let db = require('../libs/database');
-	const EMAIl='test@email.ru';
-	const PASSWORD='123456';
+
 	before(function (done) {
 		db.sequelize
 			.sync({ force: true })
 			.then(function () {
 				done();
-			})
+			});
+	});
+
+	it('Should exist', function () {
+		expect(db.Token).to.be.ok;
+	});
+
+	it('Should create access token with default value', function (done) {
+		return db
+			.Token
+			.create()
+			.then(function (token) {
+				expect(token.value).to.be.ok;
+				done();
+			});
+	});
+});
+
+describe('User model', function () {
+	let db = require('../libs/database');
+	const EMAIl = 'test@email.ru';
+	const PASSWORD = '123456';
+	before(function (done) {
+		db.sequelize
+			.sync({ force: true })
+			.then(function () {
+				done();
+			});
 	});
 
 	it('Should exist', function (done) {
@@ -38,8 +64,8 @@ describe('User model', function () {
 				done();
 			});
 	});
-	
-	it('Should check user password', function(done){
+
+	it('Should check user password', function (done) {
 		return db
 			.User
 			.create({
