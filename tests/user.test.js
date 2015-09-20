@@ -2,19 +2,8 @@
 
 const env = require('node-env-file');
 env(`${__dirname}/../.env`);
-const mongoose = require('mongoose');
 const expect = require('chai').expect;
-const UserSchema = require('../libs/database/schemas/user');
-const UserModel = mongoose.model('User', UserSchema);
-
-before(done=> {
-	mongoose.connect(process.env.DATABASE_URL);
-	const connection = mongoose.connection;
-
-	connection.on('open', () => {
-		done();
-	});
-});
+const UserModel = require('../libs/database/mongoose').UserModel;
 
 beforeEach(done=> {
 	UserModel.remove(err=> {
@@ -25,10 +14,6 @@ beforeEach(done=> {
 });
 
 describe('User schema', () => {
-	it('Should exist', () => {
-		expect(UserSchema).to.be.ok;
-	});
-
 	describe('User model', () => {
 		describe('#checkPassword', () => {
 			it('Should return true if password correct', done=> {
