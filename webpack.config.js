@@ -1,23 +1,22 @@
-/* global __dirname */
 'use strict';
 
-let path = require('path');
-let BowerWebpackPlugin = require('bower-webpack-plugin');
-let ExtractTextPlugin = require('extract-text-webpack-plugin');
-let webpack = require('webpack');
+const BowerWebpackPlugin = require('bower-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
-  context: path.join(__dirname, 'web/src'),
+  context: `${__dirname}/client/app`,
   entry: {
     index: './index.js'
   },
   output: {
-    path: path.join(__dirname, 'web/dist'),
+    path: `${__dirname}/client/dist`,
     filename: '[name].js'
   },
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js']
   },
+  devtool: 'eval-source-map',
   module: {
     loaders: [
       {
@@ -25,41 +24,14 @@ module.exports = {
         loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
       },
       {
-        test: /\.png$/,
-        loader: "url-loader?limit=100000"
-      },
-      {
-        test: /\.jpg$/,
-        loader: "file-loader"
-      },
-      {
-        test: /\.woff2$/,
-        loader: "url?limit=10000&minetype=application/font-woff2"
-      },
-      {
-        test: /\.woff$/,
-        loader: "url?limit=10000&minetype=application/font-woff"
-      },
-      {
-        test: /\.ttf$/,
-        loader: "url?limit=10000&minetype=application/octet-stream"
-      },
-      {
-        test: /\.eot$/,
-        loader: "file"
-      },
-      {
-        test: /\.svg$/,
-        loader: "url?limit=10000&minetype=image/svg+xml"
-      },
-      {
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/,
         loader: 'babel-loader'
       },
       {
-        test: /\.styl$/,
-        loader: 'style-loader!css-loader!stylus-loader'
+        test: /\.js$/,
+        exclude: /(node_modules|bower_components)/,
+        loader: 'babel-loader'
       }
     ]
   },
