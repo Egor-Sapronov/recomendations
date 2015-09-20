@@ -1,9 +1,10 @@
 'use strict';
 
 const UserModel = require('../database/mongoose').UserModel;
+const TokenModel = require('../database/mongoose').TokenModel;
 
-function localStrategy(username, password, done) {
-	UserModel
+function local(username, password, done) {
+	return UserModel
 		.findOne({ email: username }).exec()
 		.then(user=> {
 			if (!user) {
@@ -18,6 +19,29 @@ function localStrategy(username, password, done) {
 		});
 }
 
+function bearer(token, done) {
+	return TokenModel
+		.findOne({ value: token })
+		.exec()
+		.then(tokenResult=> {
+			if (!tokenResult) {
+				return done(null, false);
+			}
+			
+			return UserModel
+				.findById(tokenResult.userId)
+				.exec()
+				.then(user=> {
+					if (!user) {
+						return done(null, false, 'Unknown user');
+					}
+
+					return done(null, user);
+				});
+		});
+}
+
 module.exports = {
-	local: localStrategy
+	local: local,
+	bearer: bearer
 };

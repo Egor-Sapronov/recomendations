@@ -13,31 +13,29 @@ beforeEach(done=> {
 	});
 });
 
-describe('User schema', () => {
-	describe('User model', () => {
-		describe('#checkPassword', () => {
-			it('Should return true if password correct', done=> {
-				const user = new UserModel({
-					email: 'sapronov@mail.com',
-					password: '123456'
-				});
-
-				user.save((err, userEntity) => {
-					expect(userEntity.checkPassword('123456')).to.be.ok;
-					done();
-				});
+describe('User model', () => {
+	describe('#checkPassword', () => {
+		it('Should return true if password correct', done=> {
+			const user = new UserModel({
+				email: 'sapronov@mail.com',
+				password: '123456'
 			});
-			
-			it('Should return false if password incorrect', done=> {
-				const user = new UserModel({
-					email: 'sapronov@mail.com',
-					password: '123456'
-				});
 
-				user.save((err, userEntity) => {
-					expect(userEntity.checkPassword('test')).to.be.not.ok;
-					done();
-				});
+			user.save((err, userEntity) => {
+				expect(userEntity.checkPassword('123456')).to.be.ok;
+				done();
+			});
+		});
+
+		it('Should return false if password incorrect', done=> {
+			const user = new UserModel({
+				email: 'sapronov@mail.com',
+				password: '123456'
+			});
+
+			user.save((err, userEntity) => {
+				expect(userEntity.checkPassword('test')).to.be.not.ok;
+				done();
 			});
 		});
 	});
