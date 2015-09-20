@@ -16,7 +16,18 @@ db.on('open', () => {
 	// console.log('connected to db');
 });
 
+function clear() {
+	return new Promise((resolve, reject) => {
+		TokenModel.remove(err=> {
+			UserModel.remove(err=> {
+				return resolve();
+			});
+		});
+	});
+}
+
 module.exports = {
+	clear: clear,
 	connection: db,
 	UserModel: UserModel,
 	TokenModel: TokenModel
