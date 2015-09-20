@@ -29,3 +29,5 @@ bower_components
 .env
 
 typings
+
+client/dist
