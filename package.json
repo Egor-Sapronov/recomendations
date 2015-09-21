@@ -45,6 +45,7 @@
     "chai": "^3.2.0",
     "css-loader": "^0.16.0",
     "extract-text-webpack-plugin": "^0.8.2",
+    "faker": "^3.0.1",
     "file-loader": "^0.8.4",
     "jsx-loader": "^0.13.2",
     "node-env-file": "^0.1.7",
