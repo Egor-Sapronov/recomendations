@@ -8,6 +8,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const passport = require('./libs/auth/auth');
 const db = require('./libs/database/mongoose');
+const router = require('./router/router');
 
 app.use('/static', express.static('./client/dist'));
 app.set('view engine', 'jade');
@@ -26,6 +27,8 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use('/', router);
 
 app.get('/', function (req, res) {
 	res.render('index');
