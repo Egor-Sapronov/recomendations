@@ -16,7 +16,7 @@ function fakePlaces(count) {
 					city: faker.address.city()
 				},
 				loc: [faker.address.longitude(), faker.address.latitude()],
-				face_image: faker.image.imageUrl()
+				face_image: faker.image.nightlife()
 			})
 				);
 		}
