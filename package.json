@@ -24,6 +24,7 @@
     "cookie-parser": "^1.4.0",
     "express": "^4.13.3",
     "express-session": "^1.11.3",
+    "immutable": "^3.7.5",
     "jade": "^1.11.0",
     "logger": "0.0.1",
     "method-override": "^2.3.5",
@@ -34,7 +35,6 @@
     "passport-http-bearer": "^1.0.1",
     "passport-local": "^1.0.0",
     "react": "^0.13.3",
-    "webpack": "^1.12.2",
     "winston": "^1.0.1"
   },
   "devDependencies": {
@@ -48,7 +48,6 @@
     "faker": "^3.0.1",
     "file-loader": "^0.8.4",
     "jsx-loader": "^0.13.2",
-    "node-env-file": "^0.1.7",
     "style-loader": "^0.12.3",
     "stylus-loader": "^1.2.1",
     "url-loader": "^0.5.6",

@@ -1,6 +1,9 @@
 'use strict';
 
 require('material-design-lite');
-const React = require('react');
+require('../css/index.css');
 
-console.log(React);
+import React from 'react';
+import App from './components/app.jsx';
+
+React.render(React.createElement(App), document.getElementById('component_container'));
