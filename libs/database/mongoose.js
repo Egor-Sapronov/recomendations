@@ -15,7 +15,7 @@ db.on('error', err => {
 });
 
 db.on('open', () => {
-
+	db.db.dropDatabase();
 });
 
 module.exports = {

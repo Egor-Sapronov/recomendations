@@ -7,11 +7,11 @@ const faker = require('./faker/fake');
 
 faker.places(100)
 	.then(places=> {
+
 		app.listen(process.env.PORT || 3000, () => {
 			console.log(`Listen port ${process.env.PORT}`)
 		});
 	})
 	.catch(err=> console.log(err));
-
 
 
