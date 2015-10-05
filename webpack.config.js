@@ -1,8 +1,6 @@
 'use strict';
 
-const BowerWebpackPlugin = require('bower-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const webpack = require('webpack');
 
 module.exports = {
   context: `${__dirname}/client/app`,
@@ -10,7 +8,7 @@ module.exports = {
     index: './index.js'
   },
   output: {
-    path: `${__dirname}/client/dist`,
+    path: `${__dirname}/build`,
     filename: '[name].js'
   },
   resolve: {
@@ -24,23 +22,17 @@ module.exports = {
       },
       {
         test: /\.jsx?$/,
-        exclude: /(node_modules|bower_components)/,
+        exclude: /(node_modules)/,
         loader: 'babel-loader'
       },
       {
         test: /\.js$/,
-        exclude: /(node_modules|bower_components)/,
+        exclude: /(node_modules)/,
         loader: 'babel-loader'
       }
     ]
   },
   plugins: [
-    new ExtractTextPlugin("[name].css"),
-    new BowerWebpackPlugin({
-      modulesDirectories: ['bower_components'],
-      manifestFiles: ['bower.json', '.bower.json'],
-      includes: /.*/,
-      excludes: /.*\.less$/
-    })
+    new ExtractTextPlugin('[name].css')
   ]
 };

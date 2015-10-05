@@ -1,3 +1,11 @@
+.DS_store
+
+.eslintrc
+
+build
+
+data
+
 # Logs
 logs
 *.log

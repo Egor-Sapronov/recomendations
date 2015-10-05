@@ -10,7 +10,7 @@ const passport = require('./libs/auth/auth');
 const db = require('./libs/database/mongoose');
 const router = require('./router/router');
 
-app.use('/static', express.static('./client/dist'));
+app.use('/static', express.static('./build'));
 app.set('view engine', 'jade');
 app.set('views', './client/templates');
 app.use(cookieParser());
