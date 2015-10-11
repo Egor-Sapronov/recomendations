@@ -1,33 +1,33 @@
-'use strict';
-
+const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
+  devtool: 'source-map',
   context: `${__dirname}/client/app`,
   entry: {
-    index: './index.js'
+    index: './index.js',
   },
   output: {
     path: `${__dirname}/build`,
-    filename: '[name].js'
+    filename: '[name].js',
+    publicPath: '/static/',
   },
-  resolve: {
-    extensions: ['', '.js']
-  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin(),
+    new ExtractTextPlugin('index.css'),
+  ],
   module: {
     loaders: [
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
+        loader: ExtractTextPlugin.extract('style-loader', 'css-loader'),
       },
       {
         test: /\.js$/,
         exclude: /(node_modules)/,
-        loader: 'babel-loader'
+        loader: 'babel-loader',
       }
     ]
-  },
-  plugins: [
-    new ExtractTextPlugin('[name].css')
-  ]
+  }
 };
