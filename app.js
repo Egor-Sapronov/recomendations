@@ -57,6 +57,10 @@ app.post('/signin',
     res.redirect('/private');
   });
 
+app.get('/api/auth', passport.authenticate('basic'), (req, res) => {
+  res.send({ Ok: 'True' });
+});
+
 app.get('/signup', (req, res) => res.render('signup'));
 
 app.post('/signup', (req, res) => {

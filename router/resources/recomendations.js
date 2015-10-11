@@ -2,11 +2,13 @@ const router = require('express').Router();
 const db = require('../../libs/database/mongoose');
 const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
+const logger = require('../../libs/logger/logger')('api::recomendations');
 
 router.param('id', (req, res, next, id) => {
   return db.RecomendationModel.findById(id)
     .then(recomendation=> {
       if (!recomendation) {
+        logger.error(`recomendation ${id} not found`);
         return res.status(404).send({ Error: 'Not found' });
       }
 
@@ -14,6 +16,7 @@ router.param('id', (req, res, next, id) => {
       return next();
     })
     .catch(error=> {
+      logger.error(error);
       return res.status(400).send({ Error: 'Client error' });
     });
 });
@@ -36,10 +39,11 @@ router.post('/recomendations', upload.single('image'), (req, res) => {
     imagePath: req.file.filename,
   });
 
-  recomendation.save(err=> {
-    if (err) {
+  recomendation.save(error=> {
+    if (error) {
+      logger.error(error);
       res.statusCode = 400;
-      return res.send({ 'Error': err.name });
+      return res.send({ 'Error': 'Client error' });
     }
 
     return res.send(recomendation);

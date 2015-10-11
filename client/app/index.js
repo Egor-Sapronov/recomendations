@@ -3,6 +3,6 @@ require('material-design-lite/material.js');
 require('../css/index.css');
 require('webpack-hot-middleware/client');
 import React from 'react';
-import CreateRecomendation from './containers/create.recomendation.js';
+import Root from './containers/root';
 
-React.render(<CreateRecomendation />, document.getElementById('root'));
+React.render(<Root />, document.getElementById('root'));

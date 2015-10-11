@@ -1,8 +1,5 @@
-'use strict';
-
 const crypto = require('crypto');
 const Schema = require('mongoose').Schema;
-
 const User = new Schema({
   email: {
     type: String,

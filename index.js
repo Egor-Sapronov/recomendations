@@ -1,16 +1,16 @@
 'use strict';
-
+const logger = require('./libs/logger/logger')('server');
 const app = require('./app');
 const database = require('./libs/database/mongoose');
 
 database.init()
-    .then(() => {
-        console.log('connected to db');
-    })
-    .catch(err=> console.log(err));
+  .then(() => {
+    logger.info('connected to db');
+  })
+  .catch(err=> logger.error(err));
 
 app.listen(process.env.PORT || 3000, () => {
-    console.log(`Listen port ${process.env.PORT}`);
+  logger.info(`Listen port ${process.env.PORT}`);
 });
 
 

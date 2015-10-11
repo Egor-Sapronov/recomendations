@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Dropzone from 'react-dropzone';
-import Content from '../components/content';
+import Content from './content';
 import {api} from '../api/api';
 
 export default class CreateRecomendation extends Component {
@@ -30,7 +30,6 @@ export default class CreateRecomendation extends Component {
               <Dropzone multiple={false} onDrop={ this.onDrop }>
                 <div>{this.state.image ? <img style={{width: '200px', height: '200px'}} src={this.state.image.preview} /> : 'Фотография'}</div>
               </Dropzone>
-              <p>asfasdsfdasfasfsf</p>
               <Content onChange={ this.handleContentChange } />
               <button onClick={this.handleClick} className="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
                 <i className="material-icons">add</i>
