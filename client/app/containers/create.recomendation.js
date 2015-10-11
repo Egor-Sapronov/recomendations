@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Dropzone from 'react-dropzone';
 import Content from '../components/content';
+import {api} from '../api/api';
 
 export default class CreateRecomendation extends Component {
   constructor(props) {
@@ -8,23 +9,30 @@ export default class CreateRecomendation extends Component {
     
     this.state = {};
     this.onDrop = this.onDrop.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.handleContentChange = this.handleContentChange.bind(this);
   }
 
   onDrop(file) {
-    this.setState({file: file[0]});
+    this.setState({image: file[0]});
   }
 
-  handleContentChange() {
+  handleContentChange({target}) {
+    this.setState({content: target.value});
+  }
+
+  handleClick() {
+    api.postRecomendation(this.state);
   }
 
   render() {
     return (<div>
               <Dropzone multiple={false} onDrop={ this.onDrop }>
-                <div>{this.state.file ? <img style={{width: '200px', height: '200px'}} src={this.state.file.preview} /> : 'Фотография'}</div>
+                <div>{this.state.image ? <img style={{width: '200px', height: '200px'}} src={this.state.image.preview} /> : 'Фотография'}</div>
               </Dropzone>
               <p>asfasdsfdasfasfsf</p>
               <Content onChange={ this.handleContentChange } />
-              <button className="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+              <button onClick={this.handleClick} className="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
                 <i className="material-icons">add</i>
               </button>
             < /div>);

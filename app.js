@@ -1,5 +1,4 @@
-'use strict';
-
+GLOBAL.__rootdir = __dirname;
 const express = require('express');
 const app = express();
 const methodOverride = require('method-override');
