@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Route, Router} from 'react-router';
-import CreateRecomendation from './components/createRecomendation';
+import CreateRecomendation from '../components/createRecomendation';
 import App from '../components/app';
 import Auth from '../components/auth';
 

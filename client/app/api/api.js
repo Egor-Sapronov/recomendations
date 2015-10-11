@@ -16,9 +16,23 @@ function parseJson(response) {
 
 const URL = {
   recomendations: '/api/recomendations',
+  auth: '/api/auth',
 };
 
 export const api = {
+  auth(email, password) {
+    const authData = btoa(`${email}:${password}`);
+
+    return fetch(URL.auth, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Basic ${authData}`,
+      },
+    })
+      .then(status)
+      .then(parseJson);
+  },
   postRecomendation({image, content}) {
     const formData = new FormData();
 
@@ -34,5 +48,5 @@ export const api = {
     })
       .then(status)
       .then(parseJson);
-  }
+  },
 };
