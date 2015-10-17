@@ -10,6 +10,9 @@ const Recomendation = new Schema({
   imageName: {
     type: String,
   },
+  userId: {
+    type: String,
+  },
 });
 
 Recomendation

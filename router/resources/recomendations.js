@@ -3,6 +3,7 @@ const db = require('../../libs/database/mongoose');
 const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
 const logger = require('../../libs/logger/logger')('api::recomendations');
+const passport = require('../../libs/auth/auth');
 
 router.param('id', (req, res, next, id) => {
   return db.RecomendationModel.findById(id)
@@ -21,34 +22,44 @@ router.param('id', (req, res, next, id) => {
     });
 });
 
-router.get('/recomendations', (req, res) => {
-
-});
-
-router.get('/recomendations/:id', (req, res) => {
-  return res.send(req.recomendation);
-});
-
-router.get('/recomendations/:id/image', (req, res) => {
-  return res.sendFile(`${__rootdir}/uploads/${req.recomendation.imageName}`);
-});
-
-router.post('/recomendations', upload.single('image'), (req, res) => {
-  const recomendation = new db.RecomendationModel({
-    content: req.body.content,
-    imagePath: req.file.filename,
+router.get('/recomendations',
+  (req, res) => {
+    return db
+      .RecomendationModel
+      .find()
+      .then(recomendations=> res.send({ recomendations: recomendations }));
   });
 
-  recomendation.save(error=> {
-    if (error) {
-      logger.error(error);
-      res.statusCode = 400;
-      return res.send({ 'Error': 'Client error' });
-    }
-
-    return res.send(recomendation);
+router.get('/recomendations/:id',
+  (req, res) => {
+    return res.send(req.recomendation);
   });
-});
+
+router.get('/recomendations/:id/image',
+  (req, res) => {
+    return res.sendFile(`${__rootdir}/uploads/${req.recomendation.imageName}`);
+  });
+
+router.post('/recomendations',
+  passport.authenticate('bearer'),
+  upload.single('image'),
+  (req, res) => {
+    const recomendation = new db.RecomendationModel({
+      content: req.body.content,
+      imagePath: req.file.filename,
+      userId: req.user._id,
+    });
+
+    recomendation.save(error=> {
+      if (error) {
+        logger.error(error);
+        res.statusCode = 400;
+        return res.send({ 'Error': 'Client error' });
+      }
+
+      return res.send(recomendation);
+    });
+  });
 
 router.put('/recomendations/:id', (req, res) => {
 

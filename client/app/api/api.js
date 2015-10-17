@@ -3,11 +3,10 @@
 function status(response) {
   if (response.status >= 200 && response.status < 300) {
     return response;
-  } else {
-    const error = new Error(response.statusText);
-    error.response = response;
-    throw error;
   }
+  const error = new Error(response.statusText);
+  error.response = response;
+  throw error;
 }
 
 function parseJson(response) {
@@ -18,6 +17,8 @@ const URL = {
   recomendations: '/api/recomendations',
   auth: '/api/auth',
 };
+
+let token = localStorage.getItem('token');
 
 export const api = {
   auth(email, password) {
@@ -31,7 +32,13 @@ export const api = {
       },
     })
       .then(status)
-      .then(parseJson);
+      .then(parseJson)
+      .then(response=> {
+        token = response.token;
+        localStorage.setItem('token', response.token);
+
+        return response;
+      });
   },
   postRecomendation({image, content}) {
     const formData = new FormData();
@@ -43,6 +50,7 @@ export const api = {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
       },
       body: formData,
     })

@@ -42,8 +42,6 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
-app.get('/private', _auth, (req, res) => res.render('private'));
-
 app.get('/signin', (req, res) => res.render('signin'));
 
 app.post('/signin',
@@ -58,7 +56,14 @@ app.post('/signin',
   });
 
 app.get('/api/auth', passport.authenticate('basic'), (req, res) => {
-  res.send({ Ok: 'True' });
+  return db
+    .TokenModel
+    .findOne({ userId: req.user._id })
+    .then(token=> res.send({ token: token.value, user: req.user }));
+});
+
+app.get('/api/users', (req, res) => {
+  db.UserModel.find().then(users => res.send({ users: users }));
 });
 
 app.get('/signup', (req, res) => res.render('signup'));

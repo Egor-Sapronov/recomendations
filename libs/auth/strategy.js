@@ -1,20 +1,38 @@
 const UserModel = require('../database/mongoose').UserModel;
 const TokenModel = require('../database/mongoose').TokenModel;
+const crypto = require('crypto');
 
 function local(username, password, done) {
   return UserModel
-    .findOne({ email: username })
-    .then(user=> {
-      if (!user) {
-        return done(null, false);
-      }
+            .findOne({ email: username })
+            .then(user=> {
+              if (!user) {
+                return done(null, false);
+              }
 
-      if (user.checkPassword(password)) {
-        return done(null, user);
-      }
+              if (user.checkPassword(password)) {
+                return TokenModel.remove({ userId: user._id }, (err) => {
+                  if (err) {
+                    return done(err);
+                  }
+                  const tokenValue = crypto.randomBytes(32).toString('base64');
+                  const token = new TokenModel({
+                    userId: user._id,
+                    value: tokenValue,
+                  });
 
-      return done(null, false);
-    });
+                  return token.save((error) => {
+                    if (error) {
+                      return done(error);
+                    }
+
+                    return done(null, user);
+                  });
+                });
+              }
+
+              return done(null, false);
+            });
 }
 
 function bearer(token, done) {
