@@ -1,6 +1,6 @@
-'use strict';
+const isProduction = process.env.NODE_ENV === 'production';
 const logger = require('./libs/logger/logger')('server');
-const app = require('./app');
+const app = isProduction ? require('./app.prod.js') : require('./app.dev.js');
 const database = require('./libs/database/mongoose');
 
 database.init()

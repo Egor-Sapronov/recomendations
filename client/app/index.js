@@ -1,7 +1,6 @@
 require('material-design-lite/material.css');
 require('material-design-lite/material.js');
 require('../css/index.css');
-require('webpack-hot-middleware/client');
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Root} from './containers/root';
