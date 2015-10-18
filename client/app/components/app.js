@@ -1,10 +1,15 @@
 import React, {Component, PropTypes} from 'react';
 import { Link} from 'react-router';
 import {connect} from 'react-redux';
+import * as authActions from '../actions/auth';
 
 class App extends Component {
   static propTypes = {
     children: PropTypes.node,
+  }
+
+  componentWillMount() {
+    this.props.dispatch(authActions.getUserinfo());
   }
 
   render() {
@@ -17,6 +22,7 @@ class App extends Component {
     return (
       <div>
       <h1>App container< /h1>
+      < h4 > { this.props.user.email } < /h4>
     { links }
     { this.props.children }
     </div>);
@@ -25,7 +31,7 @@ class App extends Component {
 
 function select(state) {
   return {
-    appState: state,
+    user: state.user,
   };
 }
 

@@ -16,11 +16,24 @@ function parseJson(response) {
 const URL = {
   recomendations: '/api/recomendations',
   auth: '/api/auth',
+  userinfo: '/api/users/me',
 };
 
 let token = localStorage.getItem('token');
 
 export const api = {
+  userifno() {
+    return fetch(URL.userinfo, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+    })
+      .then(status)
+      .then(parseJson)
+      .then(response=> response);
+  },
   signin(email, password) {
     const authData = btoa(`${email}:${password}`);
 
