@@ -2,6 +2,7 @@ const router = require('express').Router();
 const db = require('../../libs/database/mongoose');
 const logger = require('../../libs/logger/logger')('api::recomendations');
 const passport = require('../../libs/auth/auth');
+const crypto = require('crypto');
 
 router.get('/auth',
   passport.authenticate('basic', { session: false }),
