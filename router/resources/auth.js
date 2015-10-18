@@ -30,11 +30,7 @@ router.post('/auth', (req, res) => {
       value: tokenValue,
     });
 
-    return token.save(() => res.send({ token: token.value, user: { _id: user._id, email: user.email } }))
-      .catch(error=> {
-        logger.error(error);
-        return res.status(400).send({ Error: 'Client error' });
-      });
+    return token.save(() => res.send({ token: token.value, user: { _id: user._id, email: user.email } }));
   });
 });
 
