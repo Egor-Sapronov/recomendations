@@ -1,10 +1,15 @@
 const mongoose = require('mongoose');
+
 const UserSchema = require('./schemas/user');
 const TokenSchema = require('./schemas/token');
 const RecomendationSchema = require('./schemas/recomendation');
+const LikeSchema = require('./schemas/like');
+
+const LikeModel = mongoose.model('Like', LikeSchema);
 const UserModel = mongoose.model('User', UserSchema);
 const TokenModel = mongoose.model('Token', TokenSchema);
 const RecomendationModel = mongoose.model('Recomendation', RecomendationSchema);
+
 const db = mongoose.connection;
 
 function initDb() {
@@ -22,4 +27,5 @@ module.exports = {
   UserModel: UserModel,
   TokenModel: TokenModel,
   RecomendationModel: RecomendationModel,
+  LikeModel: LikeModel,
 };

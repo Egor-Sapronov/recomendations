@@ -17,11 +17,48 @@ const URL = {
   recomendations: '/api/recomendations',
   auth: '/api/auth',
   userinfo: '/api/users/me',
+  nextRecomandation: '/api/recomendations/next',
 };
 
 let token = localStorage.getItem('token');
 
 export const api = {
+  like(id) {
+    return fetch(`${URL.recomendations}/${id}/likes`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+    })
+      .then(status)
+      .then(parseJson)
+      .then(response=> response.like);
+  },
+  dislike(id) {
+    return fetch(`${URL.recomendations}/${id}/dislikes`, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+    })
+      .then(status)
+      .then(parseJson)
+      .then(response=> response.like);
+  },
+  next() {
+    return fetch(URL.nextRecomandation, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+    })
+      .then(status)
+      .then(parseJson)
+      .then(recomendation => recomendation.recomendation);
+  },
   userifno() {
     return fetch(URL.userinfo, {
       method: 'GET',

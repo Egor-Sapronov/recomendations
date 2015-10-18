@@ -18,6 +18,7 @@ class App extends Component {
       '/create',
       '/signin',
       '/signup',
+      '/recomendation',
     ].map((link, index) => <p key={ index } > <Link to={ link } > { link } < /Link>< /p >);
     return (
       <div>

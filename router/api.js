@@ -1,5 +1,10 @@
 const router = require('express').Router();
+
 const recomendations = require('./resources/recomendations');
+const auth = require('./resources/auth');
+const users = require('./resources/users');
+const likes = require('./resources/likes');
+
 const logger = require('../libs/logger/logger')('api');
 
 router.use('/', (req, res, next) => {
@@ -8,6 +13,9 @@ router.use('/', (req, res, next) => {
   return next();
 });
 
+router.use('/', likes);
 router.use('/', recomendations);
+router.use('/', auth);
+router.use('/', users);
 
 module.exports = router;

@@ -5,22 +5,34 @@ const upload = multer({ dest: 'uploads/' });
 const logger = require('../../libs/logger/logger')('api::recomendations');
 const passport = require('../../libs/auth/auth');
 
-router.param('id', (req, res, next, id) => {
-  return db.RecomendationModel.findById(id)
-    .then(recomendation=> {
-      if (!recomendation) {
-        logger.error(`recomendation ${id} not found`);
-        return res.status(404).send({ Error: 'Not found' });
-      }
+router.param('id',
+  (req, res, next, id) => {
+    return db.RecomendationModel.findById(id)
+      .then(recomendation=> {
+        if (!recomendation) {
+          logger.error(`recomendation ${id} not found`);
+          return res.status(404).send({ Error: 'Not found' });
+        }
 
-      req.recomendation = recomendation;
-      return next();
-    })
-    .catch(error=> {
-      logger.error(error);
-      return res.status(400).send({ Error: 'Client error' });
-    });
-});
+        req.recomendation = recomendation;
+        return next();
+      })
+      .catch(error=> {
+        logger.error(error);
+        return res.status(400).send({ Error: 'Client error' });
+      });
+  });
+
+router.get('/recomendations/next',
+  passport.authenticate('bearer', { session: false }),
+  (req, res) => {
+    return db
+      .RecomendationModel
+      .findOne({
+        userId: { $ne: req.user._id },
+      })
+      .then(recomendation=> res.send({ recomendation: recomendation }));
+  });
 
 router.get('/recomendations',
   (req, res) => {
@@ -41,7 +53,7 @@ router.get('/recomendations/:id/image',
   });
 
 router.post('/recomendations',
-  passport.authenticate('bearer'),
+  passport.authenticate('bearer', { session: false }),
   upload.single('image'),
   (req, res) => {
     const recomendation = new db.RecomendationModel({
