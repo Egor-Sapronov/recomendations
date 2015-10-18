@@ -11,6 +11,7 @@ const router = require('./router/router');
 const webpack = require('webpack');
 const config = require('./webpack.config.js');
 const compiler = webpack(config);
+const crypto = require('crypto');
 
 app.use(require('webpack-dev-middleware')(compiler, {
   noInfo: true,
@@ -60,6 +61,25 @@ app.get('/api/auth', passport.authenticate('basic'), (req, res) => {
     .TokenModel
     .findOne({ userId: req.user._id })
     .then(token=> res.send({ token: token.value, user: req.user }));
+});
+
+app.post('/api/auth', (req, res) => {
+  const user = new db.UserModel({
+    email: req.body.email,
+    password: req.body.password,
+  });
+
+  return user.save(() => {
+    const tokenValue = crypto.randomBytes(32).toString('base64');
+    const token = new db.TokenModel({
+      userId: user._id,
+      value: tokenValue,
+    });
+
+    return token.save(()=>{
+      return res.send({token: token.value, user: user});
+    });
+  });
 });
 
 app.get('/api/users', (req, res) => {

@@ -1,18 +1,20 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {Route, Router} from 'react-router';
 import CreateRecomendation from '../components/createRecomendation';
 import App from '../components/app';
-import Auth from '../components/auth';
+import Signin from '../components/signin';
+import Signup from '../components/signup';
 
-export default class Root extends Component {
-  render() {
-    return (
-      <Router>
-        <Route path="/" component= { App } >
-          <Route path="auth" component= { Auth } />
-          <Route path="create" component= { CreateRecomendation } />
-        </Route>
-      < /Router>
+export const Root = ()=>{
+  return (
+      <div>
+        <Router>
+          <Route path="/" component= { App } >
+            <Route path="signin" component= { Signin } />
+            <Route path="signup" component= {Signup} />
+            <Route path="create" component= { CreateRecomendation } />
+          </Route>
+        < /Router>
+      </div>
     );
-  }
-}
+};

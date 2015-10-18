@@ -6,7 +6,7 @@ import {api} from '../api/api';
 export default class CreateRecomendation extends Component {
   constructor(props) {
     super(props);
-    
+
     this.state = {};
     this.onDrop = this.onDrop.bind(this);
     this.handleClick = this.handleClick.bind(this);

@@ -1,7 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 import { Link} from 'react-router';
+import {connect} from 'react-redux';
 
-export default class App extends Component {
+class App extends Component {
   static propTypes = {
     children: PropTypes.node,
   }
@@ -10,9 +11,9 @@ export default class App extends Component {
     const links = [
       '/',
       '/create',
-      '/auth',
+      '/signin',
+      '/signup',
     ].map((link, index) => <p key={ index } > <Link to={ link } > { link } < /Link>< /p >);
-
     return (
       <div>
       <h1>App container< /h1>
@@ -21,3 +22,11 @@ export default class App extends Component {
     </div>);
   }
 }
+
+function select(state) {
+  return {
+    appState: state,
+  };
+}
+
+export default connect(select)(App);

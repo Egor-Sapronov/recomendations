@@ -21,7 +21,7 @@ const URL = {
 let token = localStorage.getItem('token');
 
 export const api = {
-  auth(email, password) {
+  signin(email, password) {
     const authData = btoa(`${email}:${password}`);
 
     return fetch(URL.auth, {
@@ -30,6 +30,27 @@ export const api = {
         'Accept': 'application/json',
         'Authorization': `Basic ${authData}`,
       },
+    })
+      .then(status)
+      .then(parseJson)
+      .then(response=> {
+        token = response.token;
+        localStorage.setItem('token', response.token);
+
+        return response;
+      });
+  },
+  signup(email, password) {
+    return fetch(URL.auth, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
     })
       .then(status)
       .then(parseJson)
