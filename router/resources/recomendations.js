@@ -28,10 +28,27 @@ router.get('/recomendations/next',
   (req, res) => {
     return db
       .RecomendationModel
-      .findOne({
+      .find({
         userId: { $ne: req.user._id },
       })
-      .then(recomendation=> res.send({ recomendation: recomendation }));
+      .then(recomendations=> {
+        const recomendationsIds = recomendations.map(recomendation => recomendation._id);
+
+        return db.LikeModel.find({ recomendationId: { $in: recomendationsIds } })
+          .then(likes => {
+            if (likes.length === 0 && recomendationsIds.length > 0) {
+              return db.RecomendationModel.findOne({ _id: recomendationsIds[0] }).then(recomendation => res.send({ recomendation: recomendation }));
+            }
+
+            if (likes.length > 0 && recomendationsIds.length > 0) {
+              const likesIds = likes.map(like=> like.recomendationId);
+              console.log('likes', likesIds);
+              console.log('recomendations', recomendationsIds);
+
+              return db.RecomendationModel.findOne({ _id: { $in: recomendationsIds, $nin: likesIds } }).then(recomendation => res.send({ recomendation: recomendation }));
+            }
+          });
+      });
   });
 
 router.get('/recomendations',
