@@ -6,7 +6,10 @@
   "engines": {
     "nodejs": "4.1.0"
   },
-  "scripts": {},
+  "scripts": {
+    "start": "node index.js",
+    "postinstall": "webpack"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Egor-Sapronov/places.git"
