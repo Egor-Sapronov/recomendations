@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import Dropzone from 'react-dropzone';
 import Content from './content';
-import {api} from '../api/api';
+import {connect} from 'react-redux';
+import * as recomendationActions from '../actions/recomendation';
 
-export default class CreateRecomendation extends Component {
+export class CreateRecomendation extends Component {
   constructor(props) {
     super(props);
 
@@ -22,7 +23,7 @@ export default class CreateRecomendation extends Component {
   }
 
   handleClick() {
-    api.postRecomendation(this.state);
+    this.props.dispatch(recomendationActions.create(this.state));
   }
 
   render() {
@@ -37,3 +38,5 @@ export default class CreateRecomendation extends Component {
             < /div>);
   }
 }
+
+export default connect()(CreateRecomendation);

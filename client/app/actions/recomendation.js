@@ -2,6 +2,7 @@ import {api} from '../api/api';
 
 export const NEXT_RECOMENDATION_SUCCESS = 'NEXT_RECOMENDATION_SUCCESS';
 export const LIKE_SUCCESS = 'LIKE_SUCCESS';
+export const RECOMENDATION_CREATE_SUCCESS = 'RECOMENDATION_CREATE_SUCCESS';
 
 export function nextRecomandationSuccess(recomendation) {
   return {
@@ -14,6 +15,13 @@ export function likeSuccess(likeValue) {
   return {
     type: LIKE_SUCCESS,
     like: likeValue,
+  };
+}
+
+export function createSuccess(recomendation) {
+  return {
+    type: RECOMENDATION_CREATE_SUCCESS,
+    recomendation,
   };
 }
 
@@ -30,6 +38,14 @@ export function dislike(id) {
     return api.dislike(id)
       .then(likeValue=> dispatch(likeSuccess(likeValue)))
       .then(() => dispatch(getNext()));
+  };
+}
+
+export function create(data) {
+  return (dispatch) => {
+    return api
+      .postRecomendation(data)
+      .then(recomendation => dispatch(createSuccess(recomendation)));
   };
 }
 

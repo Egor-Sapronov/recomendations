@@ -9,8 +9,11 @@ export const toaster = store => next => action => {
     case authActions.SIGNUP_SUCCESS:
       toastr.success('Signup success');
     case authActions.AUTH_FAILURE:
-      toastr.error('Auth error');  
+      toastr.error('Auth error');
+    case recomendationActions.RECOMENDATION_CREATE_SUCCESS:
+      toastr.success('Create success');
     default:
   }
+
   return next(action);
 };
