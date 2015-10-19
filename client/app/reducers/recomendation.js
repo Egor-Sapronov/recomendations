@@ -6,7 +6,10 @@ export default function recomendation(state = {}, action) {
       return action.recomendation ? {
         ...state,
         ...action.recomendation,
-      } : {};
+        isRecomendation: true,
+      } : {
+        isRecomendation: false,
+      };
     default:
       return state;
   }

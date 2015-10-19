@@ -23,14 +23,14 @@ export class Recomendation extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <img style={{width: '300px'}} src={this.props.image}/>
-        <p>{this.props.content}</p>
-        <button onClick={this.handleLike} >Like</button>
-        <button onClick={this.handleDislike} >Dislike</button>
-      < /div>
-      );
+    return ()=>{
+      return this.props.isRecomendation ? <div>
+              <img style={{width: '300px'}} src={this.props.image}/>
+              <p>{this.props.content}</p>
+              <button onClick={this.handleLike} >Like</button>
+              <button onClick={this.handleDislike} >Dislike</button>
+            < /div> : <p>No recomendations</p>;
+    }();
   }
 }
 
