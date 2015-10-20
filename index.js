@@ -7,10 +7,8 @@ database.init()
   .then(() => {
     logger.info('connected to db');
   })
-  .catch(err=> logger.error(err));
+  .catch(err => logger.error(err));
 
 app.listen(process.env.PORT || 3000, () => {
   logger.info(`Listen port ${process.env.PORT}`);
 });
-
-
