@@ -7,8 +7,8 @@ router.post('/recomendations/:id/likes',
   passport.authenticate('bearer', { session: false }),
   (req, res) => {
     const like = new db.LikeModel({
-      userId: req.user._id,
-      recomendationId: req.params.id,
+      _user: req.user,
+      _recomendation: req.params.id,
       value: true,
     });
 
@@ -27,8 +27,8 @@ router.post('/recomendations/:id/dislikes',
   passport.authenticate('bearer', { session: false }),
   (req, res) => {
     const like = new db.LikeModel({
-      userId: req.user._id,
-      recomendationId: req.params.id,
+      _user: req.user,
+      _recomendation: req.params.id,
       value: false,
     });
 

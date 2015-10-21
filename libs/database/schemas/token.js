@@ -6,7 +6,7 @@ const Token = new Schema({
   },
   _user: {
     type: Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'User',
   },
 });
 

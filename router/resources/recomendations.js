@@ -24,30 +24,12 @@ router.param('id',
   });
 
 router.get('/recomendations/next',
-  passport.authenticate('bearer', { session: false }),
   (req, res) => {
     return db
       .RecomendationModel
-      .find({
-        userId: { $ne: req.user._id },
-      })
-      .then(recomendations=> {
-        const recomendationsIds = recomendations.map(recomendation => recomendation._id);
-
-        return db.LikeModel.find({ recomendationId: { $in: recomendationsIds } })
-          .then(likes => {
-            if (likes.length === 0 && recomendationsIds.length > 0) {
-              return db.RecomendationModel.findOne({ _id: recomendationsIds[0] }).then(recomendation => res.send({ recomendation: recomendation }));
-            }
-
-            if (likes.length > 0 && recomendationsIds.length > 0) {
-              const likesIds = likes.map(like=> like.recomendationId);
-              console.log('likes', likesIds);
-              console.log('recomendations', recomendationsIds);
-
-              return db.RecomendationModel.findOne({ _id: { $in: recomendationsIds, $nin: likesIds } }).then(recomendation => res.send({ recomendation: recomendation }));
-            }
-          });
+      .findOne()
+      .then(recomendation => {
+        res.send({ recomendation: recomendation });
       });
   });
 
@@ -76,7 +58,7 @@ router.post('/recomendations',
     const recomendation = new db.RecomendationModel({
       content: req.body.content,
       imagePath: req.file.filename,
-      userId: req.user._id,
+      _user: req.user,
     });
 
     recomendation.save(error=> {

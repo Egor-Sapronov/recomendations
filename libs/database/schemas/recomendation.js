@@ -10,6 +10,10 @@ const Recomendation = new Schema({
   imageName: {
     type: String,
   },
+  _user: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+  },
   userId: {
     type: String,
   },

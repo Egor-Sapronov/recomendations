@@ -14,23 +14,23 @@ router.get('/auth',
       .populate({
         path: '_user',
         match: {
-          _id: req.user._id
-        }
+          _id: req.user._id,
+        },
       })
       .then(token => res.send({
         token: token.value,
         user: {
           _id: req.user._id,
-          email: req.user.email
+          email: req.user.email,
         }
       }))
       .catch(error => {
         logger.error(error);
         return res.status(400).send({
-          Error: 'Client error'
+          Error: 'Client error',
         });
       });
-  });
+});
 
 router.post('/auth', (req, res) => {
   const user = new db.UserModel({
@@ -55,12 +55,12 @@ router.post('/auth', (req, res) => {
         logger.error(err);
         return res.status(400).send();
       }
-      
+
       return res.send({
         token: token.value,
         user: {
           _id: user._id,
-          email: user.email
+          email: user.email,
         }
       });
     });

@@ -5,7 +5,7 @@ const crypto = require('crypto');
 function local(username, password, done) {
   return UserModel
     .findOne({
-      email: username
+      email: username,
     })
     .then(user => {
       if (!user) {
@@ -49,15 +49,13 @@ function local(username, password, done) {
 function bearer(token, done) {
   return TokenModel
     .findOne({
-      value: token
+      value: token,
     })
     .populate('_user')
     .then(tokenResult => {
       if (!tokenResult) {
         return done(null, false);
       }
-
-      console.log(tokenResult);
 
       return done(null, tokenResult._user);
     });

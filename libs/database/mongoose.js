@@ -17,7 +17,16 @@ function initDb() {
     mongoose.connect(process.env.DATABASE_URL);
 
     db.on('error', err=> reject(err));
-    db.on('open', () => resolve(db));
+    db.on('open', () => {
+      // mongoose.connection.db.dropDatabase(err=> {
+      //   if (err) {
+      //     console.log(err);
+      //   }
+
+      //   console.log('db dropped');
+      // });
+      return resolve(db);
+    });
   });
 }
 

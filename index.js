@@ -6,7 +6,6 @@ const database = require('./libs/database/mongoose');
 database.init()
   .then(() => {
     logger.info('connected to db');
-    database.db.dropDatabase();
   })
   .catch(err => logger.error(err));
 

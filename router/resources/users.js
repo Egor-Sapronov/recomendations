@@ -5,12 +5,12 @@ const passport = require('../../libs/auth/auth');
 
 router.get('/users/me',
   passport.authenticate('bearer', {
-    session: false
+    session: false,
   }), (req, res) => {
-    res.send({
+  res.send({
       user: {
         _id: req.user._id,
-        email: req.user.email
+        email: req.user.email,
       }
     });
   });

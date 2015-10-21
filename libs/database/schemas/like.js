@@ -3,11 +3,13 @@ const Like = new Schema({
   value: {
     type: Boolean,
   },
-  recomendationId: {
-    type: String,
+  _recomendation: {
+    type: Schema.Types.ObjectId,
+    ref: 'Recomendation',
   },
-  userId: {
-    type: String,
+  _user: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
   },
 });
 
