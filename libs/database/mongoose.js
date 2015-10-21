@@ -3,9 +3,7 @@ const mongoose = require('mongoose');
 const UserSchema = require('./schemas/user');
 const TokenSchema = require('./schemas/token');
 const RecomendationSchema = require('./schemas/recomendation');
-const LikeSchema = require('./schemas/like');
 
-const LikeModel = mongoose.model('Like', LikeSchema);
 const UserModel = mongoose.model('User', UserSchema);
 const TokenModel = mongoose.model('Token', TokenSchema);
 const RecomendationModel = mongoose.model('Recomendation', RecomendationSchema);
@@ -18,13 +16,9 @@ function initDb() {
 
     db.on('error', err=> reject(err));
     db.on('open', () => {
-      // mongoose.connection.db.dropDatabase(err=> {
-      //   if (err) {
-      //     console.log(err);
-      //   }
-
-      //   console.log('db dropped');
-      // });
+      if (process.env.NODE_ENV === 'production') {
+        mongoose.connection.db.dropDatabase(err=> { });
+      }
       return resolve(db);
     });
   });
@@ -36,5 +30,4 @@ module.exports = {
   UserModel: UserModel,
   TokenModel: TokenModel,
   RecomendationModel: RecomendationModel,
-  LikeModel: LikeModel,
 };

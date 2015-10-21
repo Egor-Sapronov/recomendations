@@ -1,4 +1,6 @@
 const Schema = require('mongoose').Schema;
+const LikeSchema = require('./like');
+
 const Recomendation = new Schema({
   content: {
     type: String,
@@ -14,6 +16,7 @@ const Recomendation = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User',
   },
+  likes: [LikeSchema],
   userId: {
     type: String,
   },
@@ -21,7 +24,7 @@ const Recomendation = new Schema({
 
 Recomendation
   .virtual('imagePath')
-  .set(function(filename) {
+  .set(function (filename) {
     this.image = `/api/recomendations/${this.id}/image`;
     this.imageName = filename;
   });

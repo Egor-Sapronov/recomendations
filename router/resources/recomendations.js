@@ -24,13 +24,17 @@ router.param('id',
   });
 
 router.get('/recomendations/next',
+  passport.authenticate('bearer', { session: false }),
   (req, res) => {
     return db
       .RecomendationModel
-      .findOne()
-      .then(recomendation => {
-        res.send({ recomendation: recomendation });
-      });
+      .aggregate([
+        { $match: { _user: { $ne: req.user._id } } },
+        { $unwind: '$likes' },
+        { $match: { 'likes._user': { $ne: req.user._id } } },
+        { $limit: 1 }], (err, recomendations) => {
+          res.send({ recomendation: recomendations[0] });
+        });
   });
 
 router.get('/recomendations',
@@ -38,6 +42,7 @@ router.get('/recomendations',
     return db
       .RecomendationModel
       .find()
+      .populate('_user _likes')
       .then(recomendations=> res.send({ recomendations: recomendations }));
   });
 

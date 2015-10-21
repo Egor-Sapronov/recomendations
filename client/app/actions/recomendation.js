@@ -3,6 +3,13 @@ import {api} from '../api/api';
 export const NEXT_RECOMENDATION_SUCCESS = 'NEXT_RECOMENDATION_SUCCESS';
 export const LIKE_SUCCESS = 'LIKE_SUCCESS';
 export const RECOMENDATION_CREATE_SUCCESS = 'RECOMENDATION_CREATE_SUCCESS';
+export const START_FETCH_NEXT = 'START_FETCH_NEXT';
+
+export function startFetchNext() {
+  return {
+    type: START_FETCH_NEXT,
+  };
+}
 
 export function nextRecomandationSuccess(recomendation) {
   return {
@@ -51,6 +58,7 @@ export function create(data) {
 
 export function getNext() {
   return (dispatch) => {
+    dispatch(startFetchNext());
     return api
       .next()
       .then(recomendation=> dispatch(nextRecomandationSuccess(recomendation)));
