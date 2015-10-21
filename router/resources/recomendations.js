@@ -30,7 +30,6 @@ router.get('/recomendations/next',
       .RecomendationModel
       .aggregate([
         { $match: { _user: { $ne: req.user._id } } },
-        { $unwind: '$likes' },
         { $match: { 'likes._user': { $ne: req.user._id } } },
         { $limit: 1 }], (err, recomendations) => {
           res.send({ recomendation: recomendations[0] });
