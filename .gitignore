@@ -2,8 +2,6 @@ uploads
 
 .DS_store
 
-.eslintrc
-
 build
 
 data
