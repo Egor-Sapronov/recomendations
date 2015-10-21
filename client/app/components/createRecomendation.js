@@ -13,6 +13,14 @@ export class CreateRecomendation extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.handleContentChange = this.handleContentChange.bind(this);
   }
+  
+  componentDidMount() {
+    componentHandler.upgradeDom();
+  }
+
+  componentDidUpdate() {
+    componentHandler.upgradeDom();
+  }
 
   onDrop(file) {
     this.setState({image: file[0]});

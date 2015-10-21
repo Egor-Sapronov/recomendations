@@ -3,6 +3,14 @@ const db = require('../../libs/database/mongoose');
 const logger = require('../../libs/logger/logger')('api::recomendations');
 const passport = require('../../libs/auth/auth');
 
+router.get('/likes',
+  (req, res) => {
+    return db
+      .LikeModel
+      .find()
+      .then(likes=> res.send({ likes: likes }));
+  });
+
 router.post('/recomendations/:id/likes',
   passport.authenticate('bearer', { session: false }),
   (req, res) => {
