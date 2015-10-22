@@ -1,5 +1,8 @@
 {
   "parser": "babel-eslint",
 	"extends":"airbnb",
-	"comma-dangle": [2, "never"]
+	"comma-dangle": [2, "never"],
+  "globals": [
+    "componentHandler"
+  ]
 }

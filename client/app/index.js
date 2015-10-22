@@ -1,6 +1,5 @@
 require('material-design-lite/material.css');
 require('material-design-lite/material.js');
-require('../css/index.css');
 require('toastr/build/toastr.css');
 import React from 'react';
 import ReactDOM from 'react-dom';

@@ -1,12 +1,14 @@
-extends ./partials/layout.jade
-
-block title
-	title index
-
-block main
-	.mdl-grid
-		.mdl-cell.mdl-cell--4-col
-		.mdl-cell.mdl-cell--4-col
-			#root
-		.mdl-cell.mdl-cell--4-col
-				
+doctype
+html.no-js
+    head
+        meta(charset='utf-8')
+        meta(http-equiv='X-UA-Compatible', content='IE=edge')
+        block Recomendations
+        meta(name='description', content='')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
+        link(rel='stylesheet', href='/static/index.css')
+    body
+      .mdl-layout.mdl-js-layout.mdl-layout--fixed-header
+        #root
+      script(src='/static/index.js')

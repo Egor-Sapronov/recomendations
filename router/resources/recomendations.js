@@ -41,7 +41,7 @@ router.get('/recomendations',
     return db
       .RecomendationModel
       .find()
-      .populate('_user _likes')
+      .populate('_user')
       .then(recomendations=> res.send({ recomendations: recomendations }));
   });
 

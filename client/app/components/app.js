@@ -1,11 +1,14 @@
 import React, {Component, PropTypes} from 'react';
-import { Link} from 'react-router';
 import {connect} from 'react-redux';
 import * as authActions from '../actions/auth';
+import Navbar from './navbar';
+import LayoutContent from './layoutContent';
 
 class App extends Component {
   static propTypes = {
     children: PropTypes.node,
+    dispatch: PropTypes.func,
+    user: PropTypes.object,
   }
 
   componentWillMount() {
@@ -13,20 +16,12 @@ class App extends Component {
   }
 
   render() {
-    const links = [
-      '/',
-      '/create',
-      '/signin',
-      '/signup',
-      '/recomendation',
-    ].map((link, index) => <p key={ index } > <Link to={ link } > { link } < /Link>< /p >);
     return (
       <div>
-      <h1>App container< /h1>
-      < h4 > { this.props.user.email } < /h4>
-    { links }
-    { this.props.children }
-    </div>);
+        <Navbar user={ this.props.user.email } />
+        <LayoutContent children={ this.props.children } />
+      </div>
+    );
   }
 }
 
