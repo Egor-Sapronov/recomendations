@@ -5,17 +5,17 @@ export default function user(state = {}, action) {
     case authActions.USERINFO_SUCCESS:
       return {
         ...state,
-        ...action.data.user,
+        ...action.user,
       };
     case authActions.SIGNIN_SUCCESS:
       return {
         ...state,
-        ...action.data.user,
+        ...action.user,
       };
     case authActions.SIGNUP_SUCCESS:
       return {
         ...state,
-        ...action.data.user,
+        ...action.user,
       };
     case authActions.AUTH_FAILURE:
       return {};
