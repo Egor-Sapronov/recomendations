@@ -9,7 +9,8 @@
   "scripts": {
     "start": "node index.js",
     "postinstall": "webpack",
-    "lint": "eslint client/app/**"
+    "lint": "eslint client/app/**",
+    "logs": "heroku logs --app recomendations  --tail"
   },
   "repository": {
     "type": "git",
