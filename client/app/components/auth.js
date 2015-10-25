@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import * as authActions from '../actions/auth';
 
 function select(state) {
   return state;
@@ -7,14 +8,13 @@ function select(state) {
 
 class Auth extends Component {
   componentWillMount() {
-    console.log(this.props.params.token);
+    localStorage.setItem('token', this.props.params.token);
+    this.props.dispatch(authActions.getUserinfo());
+    location.hash = '#';
   }
 
   render() {
-    return (
-      <div>
-      </div>
-      );
+    return (<div />);
   }
 }
 
