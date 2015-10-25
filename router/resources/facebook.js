@@ -11,7 +11,17 @@ router.get('/facebook',
 router.get('/facebook/callback',
   passport.authenticate('facebook', { session: false }),
   (req, res) => {
-    return res.send({ user: req.user });
+    return db
+      .TokenModel
+      .findOne()
+      .populate({
+        path: '_user',
+        match: {
+          _id: req.user._id,
+        },
+      }, (token) => {
+        res.send({ user: token });
+      });
   });
 
 module.exports = router;

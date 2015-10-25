@@ -24,7 +24,6 @@ function facebook(accessToken, refreshToken, profile, done) {
   return UserModel
     .findOne({ providerId: profile.id })
     .then(user=> {
-      console.log(profile);
       if (!user) {
         const userEntity = new UserModel({
           providerId: profile.id,
