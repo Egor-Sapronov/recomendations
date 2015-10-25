@@ -1,12 +1,12 @@
 import React from 'react';
 import {Route, Router} from 'react-router';
-import CreateRecomendation from '../components/createRecomendation';
-import App from '../components/app';
-import Recomendation from '../components/recomendation';
+import CreateRecomendation from './createRecomendation';
+import App from './app';
+import Recomendation from './recomendation';
 import Auth from '../components/auth';
 
 export const Root = ()=>{
-  return (
+    return (
       <div>
         <Router>
           <Route path="/" component= { App } >

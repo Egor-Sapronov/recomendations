@@ -1,8 +1,10 @@
 {
-  "parser": "babel-eslint",
-	"extends":"airbnb",
-	"comma-dangle": [2, "never"],
-  "globals": [
-    "componentHandler"
-  ]
+    "parser": "babel-eslint",
+    "extends": "airbnb",
+    "comma-dangle": [2, "never"],
+    "rules": {
+        "indent": [2, 4, {
+            "SwitchCase": 1
+        }]
+    }
 }
