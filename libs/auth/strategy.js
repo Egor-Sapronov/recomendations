@@ -2,9 +2,9 @@ const UserModel = require('../database/mongoose').UserModel;
 const TokenModel = require('../database/mongoose').TokenModel;
 const crypto = require('crypto');
 
-function assignToken(user) {
+function assignToken(user, facebookToken) {
   return new Promise((resolve, reject) => {
-    const tokenValue = crypto.randomBytes(32).toString('base64');
+    const tokenValue = facebookToken || crypto.randomBytes(32).toString('base64');
     const token = new TokenModel({
       value: tokenValue,
       _user: user,
@@ -24,6 +24,7 @@ function facebook(accessToken, refreshToken, profile, done) {
   return UserModel
     .findOne({ providerId: profile.id })
     .then(user=> {
+      console.log(profile);
       if (!user) {
         const userEntity = new UserModel({
           providerId: profile.id,
@@ -39,7 +40,7 @@ function facebook(accessToken, refreshToken, profile, done) {
             return done(err);
           }
 
-          return assignToken(userEntity)
+          return assignToken(userEntity, accessToken)
             .then(result=> {
               return done(null, result);
             });
