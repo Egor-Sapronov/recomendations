@@ -6,7 +6,7 @@ import rootReducer from '../reducers/root';
 
 const loggerMiddleware = createLogger({
   level: 'info',
-  predicate: (getState, action) => process.env.NODE_ENV === 'development',
+  predicate: () => true,
   collapsed: true,
 });
 
