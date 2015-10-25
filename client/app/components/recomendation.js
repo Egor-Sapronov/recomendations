@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as recomendationActions from '../actions/recomendation';
+import CircularProgress from 'material-ui/lib/circular-progress';
+import RaisedButton from 'material-ui/lib/raised-button';
 
 const FETCHING = 'FETCHING';
 const RECOMENDATION = 'RECOMENDATION';
@@ -34,7 +36,7 @@ export class Recomendation extends Component {
     let screen;
     switch (this.props.screen) {
       case FETCHING:
-        screen = <p>Loading...</p>;
+        screen = <CircularProgress mode="indeterminate" />;
         break;
       case RECOMENDATION:
         screen = (<div>
@@ -45,10 +47,10 @@ export class Recomendation extends Component {
             < /div>);
         break;    
       case NO_RECOMENDATION:
-        screen = <a href="#recomendation" onClick={this.getNext.bind(this)}>Try again</a>;
+        screen = <RaisedButton label="Try again" primary={ true } href="#recomendation" onClick={this.getNext.bind(this)} />;
         break;
       default:
-        screen = <a href="#recomendation" onClick={this.getNext.bind(this)}>Try again</a>;
+        screen = <RaisedButton label="Try again" primary={true} href="#recomendation" onClick={this.getNext.bind(this)} />;
     }
 
     return screen;

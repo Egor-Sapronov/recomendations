@@ -22,6 +22,9 @@ export function getUserinfo() {
       .userifno()
       .then(user => {
         return dispatch(userinfoSuccess(user));
+      })
+      .catch(error => {
+        return dispatch(authFailure(error));
       });
   };
 }
