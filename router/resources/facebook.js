@@ -13,13 +13,10 @@ router.get('/facebook/callback',
   (req, res) => {
     return db
       .TokenModel
-      .findOne()
-      .populate({
-        path: '_user',
-        match: {
-          _id: req.user._id,
-        },
-      }, (token) => {
+      .findOne({
+        _user: req.user._id,
+      })
+      .then((token) => {
         res.send({ user: token });
       });
   });
