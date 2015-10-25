@@ -18,7 +18,7 @@ router.get('/facebook/callback',
       })
       .populate('_user')
       .then((token) => {
-        res.send({ user: token });
+        return res.redirect(`/#auth/${token.value}`);
       });
   });
 
