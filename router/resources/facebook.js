@@ -16,6 +16,7 @@ router.get('/facebook/callback',
       .findOne({
         _user: req.user._id,
       })
+      .populate('_user')
       .then((token) => {
         res.send({ user: token });
       });
