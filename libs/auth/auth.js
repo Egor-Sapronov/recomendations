@@ -10,7 +10,7 @@ const facebook = require('./strategy').facebook;
 passport.use(new BasicStrategy(local));
 passport.use(new LocalStrategy({}, local));
 passport.use(new FaceBookStrategy({
-  clientId: process.env.FACEBOOK_APP_ID,
+  clientID: process.env.FACEBOOK_APP_ID,
   clientSecret: process.env.FACEBOOK_APP_SECRET,
   callbackURL: process.env.FACEBOOK_CALLBACK_URL,
 }, facebook));
