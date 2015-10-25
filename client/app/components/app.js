@@ -18,7 +18,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Navbar user={ this.props.user.email } />
+        <Navbar user={ this.props.user.name } />
         <LayoutContent children={ this.props.children } />
       </div>
     );

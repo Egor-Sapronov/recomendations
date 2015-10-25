@@ -1,17 +1,11 @@
 const router = require('express').Router();
 const db = require('../../libs/database/mongoose');
-const logger = require('../../libs/logger/logger')('api::recomendations');
 const passport = require('../../libs/auth/auth');
 
 router.get('/users/me',
   passport.authenticate('bearer', { session: false }),
   (req, res) => {
-    return res.send({
-      user: {
-        _id: req.user._id,
-        email: req.user.email,
-      },
-    });
+    return res.send({ user: req.user });
   });
 
 router.get('/users',
