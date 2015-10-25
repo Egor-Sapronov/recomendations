@@ -1,6 +1,11 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 
-export default class Auth extends Component {
+function select(state) {
+  return state;
+}
+
+class Auth extends Component {
   componentWillMount() {
     console.log(this.props.params.token);
   }
@@ -9,6 +14,8 @@ export default class Auth extends Component {
     return (
       <div>
       </div>
-    );
+      );
   }
 }
+
+export default connect(select)(Auth);
