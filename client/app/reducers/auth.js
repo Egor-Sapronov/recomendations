@@ -5,6 +5,7 @@ export default function auth(state = {}, action) {
     case authActions.USERINFO_SUCCESS:
       return {
         ...state,
+        ...action.user,        
         isAuthenticated: true,
       };
     case authActions.AUTH_FAILURE:
@@ -15,7 +16,6 @@ export default function auth(state = {}, action) {
     default:
       return {
         ...state,
-        ...action.user,
         isAuthenticated: false,
       };
   }
