@@ -20,7 +20,11 @@ export function getUserinfo() {
   return (dispatch) => {
     return api
       .userifno()
-      .then(user => dispatch(userinfoSuccess(user)))
-      .catch(() => dispatch(authFailure()));
+      .then(user => {
+        return dispatch(userinfoSuccess(user));
+      })
+      .catch(error => {
+        return dispatch(authFailure(error));
+      });
   };
 }
