@@ -1,38 +1,26 @@
-const crypto = require('crypto');
 const Schema = require('mongoose').Schema;
 const User = new Schema({
-  email: {
+  providerId: {
     type: String,
     unique: true,
     required: true,
   },
-  hashedPassword: {
+  provider: {
     type: String,
-    required: true,
   },
-  salt: {
+  profileLink: {
     type: String,
-    require: true,
+    unique: true,
+  },
+  displayName: {
+    type: String,
+  },
+  name: {
+    type: String,
+  },
+  email: {
+    type: String,
   },
 });
-
-User.methods.encryptPassword = function(password) {
-  return crypto.createHmac('sha1', this.salt).update(password).digest('hex');
-};
-
-User.methods.checkPassword = function(password) {
-  return this.encryptPassword(password) === this.hashedPassword;
-};
-
-User
-  .virtual('password')
-  .set(function(password) {
-    this._plainPassword = password;
-    this.salt = crypto.randomBytes(32).toString('base64');
-    this.hashedPassword = this.encryptPassword(password);
-  })
-  .get(function() {
-    return this._plainPassword;
-  });
 
 module.exports = User;

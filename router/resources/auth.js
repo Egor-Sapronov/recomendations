@@ -6,7 +6,7 @@ const crypto = require('crypto');
 
 router.get('/auth',
   passport.authenticate('basic', {
-    session: false
+    session: false,
   }), (req, res) => {
     return db
       .TokenModel
@@ -30,7 +30,7 @@ router.get('/auth',
           Error: 'Client error',
         });
       });
-});
+  });
 
 router.post('/auth', (req, res) => {
   const user = new db.UserModel({
@@ -61,7 +61,7 @@ router.post('/auth', (req, res) => {
         user: {
           _id: user._id,
           email: user.email,
-        }
+        },
       });
     });
   });
