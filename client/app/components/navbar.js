@@ -8,7 +8,6 @@ export default props => (
       <nav className="mdl-navigation mdl-layout--large-screen-only">
         <a className="mdl-navigation__link" href="#create">Create</a>
         <a className="mdl-navigation__link" href="#recomendation">Recomendation</a>
-        <a className="mdl-navigation__link" href="/facebook">Signin</a>
         <a className="mdl-navigation__link" href="#">{props.user}</a>
       </nav>
     </div>
