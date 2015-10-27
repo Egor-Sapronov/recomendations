@@ -11,23 +11,23 @@ const RecomendationModel = mongoose.model('Recomendation', RecomendationSchema);
 const db = mongoose.connection;
 
 function initDb() {
-  return new Promise((resolve, reject) => {
-    mongoose.connect(process.env.DATABASE_URL);
+    return new Promise((resolve, reject) => {
+        mongoose.connect(process.env.DATABASE_URL);
 
-    db.on('error', err=> reject(err));
-    db.on('open', () => {
-      if (process.env.NODE_ENV === 'production') {
-        mongoose.connection.db.dropDatabase(err=> { });
-      }
-      return resolve(db);
+        db.on('error', err => reject(err));
+        db.on('open', () => {
+            if (process.env.NODE_ENV === 'production') {
+                mongoose.connection.db.dropDatabase(() => {});
+            }
+            return resolve(db);
+        });
     });
-  });
 }
 
 module.exports = {
-  db: db,
-  init: initDb,
-  UserModel: UserModel,
-  TokenModel: TokenModel,
-  RecomendationModel: RecomendationModel,
+    db: db,
+    init: initDb,
+    UserModel: UserModel,
+    TokenModel: TokenModel,
+    RecomendationModel: RecomendationModel,
 };
