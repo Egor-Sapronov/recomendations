@@ -6,7 +6,9 @@ const db = require('../libs/database/mongoose');
 router.use('/', facebook);
 router.use('/api', api);
 
-router.get('/', (req, res, next) => {
+router.get('/signin', (req, res) => res.render('signin'));
+
+router.get('*', (req, res, next) => {
     if (req.isAuthenticated()) {
         return next();
     }
@@ -23,7 +25,5 @@ router.get('/', (req, res, next) => {
             });
         });
 });
-
-router.get('/signin', (req, res) => res.render('signin'));
 
 module.exports = router;

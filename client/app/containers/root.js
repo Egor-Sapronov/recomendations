@@ -1,15 +1,16 @@
 import React from 'react';
-import {Route, Router} from 'react-router';
+import {Route, Router, IndexRoute} from 'react-router';
 import CreateRecomendation from './createRecomendation';
 import App from './app';
 import Recomendation from './recomendation';
+import createHashHistory from 'history/lib/createHashHistory';
 
 export const Root = () => {
     return (
       <div>
         <Router>
           <Route path="/" component= { App } >
-            <Route path="/" component= { Recomendation } />
+            <IndexRoute component= { Recomendation } />
             <Route path="create" component= { CreateRecomendation } />
           </Route>
         < /Router>
