@@ -7,7 +7,7 @@ export default props => (
       <div className="mdl-layout-spacer" />
       <nav className="mdl-navigation mdl-layout--large-screen-only">
         <a className="mdl-navigation__link" href="#create">Create</a>
-        <a className="mdl-navigation__link" href="#recomendation">Recomendation</a>
+        <a className="mdl-navigation__link" href="#">Recomendation</a>
         <a className="mdl-navigation__link" href="#">{props.user}</a>
       </nav>
     </div>
