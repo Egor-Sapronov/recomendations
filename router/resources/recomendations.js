@@ -33,40 +33,45 @@ router.get('/recomendations/next',
         session: false
     }), (req, res) => {
 
-        return db
-            .RecomendationModel
-            .findOne()
-            .populate('_user')
-            .then((recomendation) => {
-                return res.send({
-                    recomendation: recomendation
-                });
-            });
-
         // return db
         //     .RecomendationModel
-        //     .aggregate([
-        //     {
-        //         $match: {
-        //             _user: {
-        //                 $ne: req.user._id
-        //             }
-        //         }
-        //     },
-        //     {
-        //         $match: {
-        //             'likes._user': {
-        //                 $ne: req.user._id
-        //             }
-        //         }
-        //     },
-        //     {
-        //         $limit: 1
-        //     }], (err, recomendations) => {
-        //         res.send({
-        //             recomendation: recomendations[0]
+        //     .findOne()
+        //     .populate('_user')
+        //     .then((recomendation) => {
+        //         return res.send({
+        //             recomendation: recomendation
         //         });
         //     });
+
+        return db
+            .RecomendationModel
+            .aggregate([
+            {
+                $match: {
+                    'likes._user': {
+                        $ne: req.user._id
+                    }
+                }
+            },
+            {
+                $limit: 1
+            }], (err, recomendations) => {
+                if (recomendations[0]) {
+                    return db
+                        .RecomendationModel
+                        .findOne({
+                            _id: recomendations[0]._id
+                        })
+                        .populate('_user')
+                        .then(recomendation => res.send({
+                            recomendation: recomendation
+                        }));
+                }
+
+                return res.send({
+                    recomendation: null
+                });
+            });
     });
 
 router.get('/recomendations', (req, res) => {
@@ -83,10 +88,9 @@ router.get('/recomendations/:id', (req, res) => {
     return res.send(req.recomendation);
 });
 
-router.get('/recomendations/:id/image',
-  (req, res) => {
+router.get('/recomendations/:id/image', (req, res) => {
     return res.sendFile(`${__rootdir}/uploads/${req.recomendation.imageName}`);
-  });
+});
 
 router.post('/recomendations',
     passport.authenticate('bearer', {

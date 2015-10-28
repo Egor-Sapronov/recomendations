@@ -8,6 +8,8 @@ import CardText from 'material-ui/lib/card/card-text';
 import CardActions from 'material-ui/lib/card/card-actions';
 import FlatButton from 'material-ui/lib/flat-button';
 import CardMedia from 'material-ui/lib/card/card-media';
+import CircularProgress from 'material-ui/lib/circular-progress';
+import RaisedButton from 'material-ui/lib/raised-button';
 
 const FETCHING = 'FETCHING';
 const RECOMENDATION = 'RECOMENDATION';
@@ -35,7 +37,11 @@ class Recommendation extends Component {
 
     render() {
         const {screen} = this.props;
-        let displayScreen = <div />;
+        let displayScreen = <RaisedButton label="Try again" primary href="#recomendation" onClick={this.getNext.bind(this)} />;;
+
+        if(screen===FETCHING){
+            displayScreen = <CircularProgress mode="indeterminate" />;
+        }
 
         if (screen===RECOMENDATION){
             displayScreen = <Card>
@@ -51,8 +57,8 @@ class Recommendation extends Component {
                     {this.props.content}
                 </CardText>
                 <CardActions>
-                    <FlatButton label="dislike"/>
-                    <FlatButton label="like"/>
+                    <FlatButton onClick={this.handleDislike.bind(this)} label="dislike"/>
+                    <FlatButton onClick={this.handleLike.bind(this)} label="like"/>
                 </CardActions>
             </Card>;
         }
