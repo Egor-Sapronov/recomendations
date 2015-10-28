@@ -1,46 +1,47 @@
 import request, {getHeaders} from './request';
 
 const URL = {
-  recomendations: '/api/recomendations',
-  auth: '/api/auth',
-  userinfo: '/api/users/me',
-  nextRecomandation: '/api/recomendations/next',
+    recomendations: '/api/recomendations',
+    auth: '/api/auth',
+    userinfo: '/api/users/me',
+    nextRecomandation: '/api/recomendations/next',
 };
 
+
 export const api = {
-  like(id) {
-    return request(`${URL.recomendations}/${id}/likes`, {
-      method: 'POST',
-      headers: getHeaders(),
-    })
-      .then(response => response.like);
-  },
+    like(id) {
+        return request(`${URL.recomendations}/${id}/likes`, {
+            method: 'POST',
+            headers: getHeaders(),
+        })
+        .then(response => response.like);
+    },
 
-  dislike(id) {
-    return request(`${URL.recomendations}/${id}/dislikes`, {
-      method: 'POST',
-      headers: getHeaders(),
-    })
-      .then(response => response.like);
-  },
+    dislike(id) {
+        return request(`${URL.recomendations}/${id}/dislikes`, {
+            method: 'POST',
+            headers: getHeaders(),
+        })
+        .then(response => response.like);
+    },
 
-  next() {
-    return request(URL.nextRecomandation, {
-      method: 'GET',
-      headers: getHeaders(),
-    })
-      .then(response => response.recomendation);
-  },
+    next() {
+        return request(URL.nextRecomandation, {
+            method: 'GET',
+            headers: getHeaders(),
+        })
+        .then(response => response.recomendation);
+    },
 
-  userifno() {
-    return request(URL.userinfo, {
-      method: 'GET',
-      headers: getHeaders(),
-    })
-      .then(response => response.user);
-  },
+    userifno() {
+        return request(URL.userinfo, {
+            method: 'GET',
+            headers: getHeaders(),
+        })
+        .then(response => response.user);
+    },
 
-  postRecomendation({
+    postRecomendation({
     image,
     content,
   }) {
