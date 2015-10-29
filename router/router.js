@@ -8,7 +8,7 @@ router.use('/api', api);
 
 router.get('/signin', (req, res) => res.render('signin'));
 
-router.get('/', (req, res, next) => {
+router.get('*', (req, res, next) => {
     if (req.isAuthenticated()) {
         return next();
     }
