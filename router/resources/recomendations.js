@@ -1,3 +1,5 @@
+'use strict';
+
 const router = require('express').Router();
 const db = require('../../libs/database/mongoose');
 const multer = require('multer');
@@ -6,6 +8,9 @@ const upload = multer({
 });
 const logger = require('../../libs/logger/logger')('api::recomendations');
 const passport = require('../../libs/auth/auth');
+const getUrls = require('get-urls');
+const fetch = require('isomorphic-fetch');
+const autolinker = require('autolinker');
 
 router.param('id', (req, res, next, id) => {
     return db.RecomendationModel.findById(id)
@@ -32,17 +37,6 @@ router.get('/recomendations/next',
     passport.authenticate('bearer', {
         session: false
     }), (req, res) => {
-
-        // return db
-        //     .RecomendationModel
-        //     .findOne()
-        //     .populate('_user')
-        //     .then((recomendation) => {
-        //         return res.send({
-        //             recomendation: recomendation
-        //         });
-        //     });
-
         return db
             .RecomendationModel
             .aggregate([
@@ -99,21 +93,32 @@ router.post('/recomendations',
     upload.single('image'), (req, res) => {
         const recomendation = new db.RecomendationModel({
             content: req.body.content,
-            imagePath: req.file.filename,
+            linkedContent: autolinker.link(req.body.content),
+            imagePath: req.file ? req.file.filename : null,
             _user: req.user,
         });
 
-        recomendation.save(error => {
-            if (error) {
-                logger.error(error);
-                res.statusCode = 400;
-                return res.send({
-                    'Error': 'Client error'
-                });
-            }
+        const urls = getUrls(recomendation.content);
 
-            return res.send(recomendation);
-        });
+        return Promise
+            .all(urls.map(item => {
+                return fetch(`http://api.embed.ly/1/oembed?key=${process.env.EMBED_API_KEY}&url=${item}`)
+                    .then(resoponse => resoponse.json());
+            }))
+            .then(results => {
+                recomendation.data = results;
+
+                recomendation.save(error => {
+                    if (error) {
+                        logger.error(error);
+                        res.statusCode = 400;
+                        return res.send({
+                            'Error': 'Client error'
+                        });
+                    }
+                    return res.send(recomendation);
+                });
+            });
     });
 
 module.exports = router;

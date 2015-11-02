@@ -48,7 +48,9 @@ export const api = {
     const formData = new FormData();
 
     formData.append('image', image);
-    formData.append('content', content);
+    if (content) {
+        formData.append('content', content);
+    }
 
     return request(URL.recomendations, {
       method: 'POST',

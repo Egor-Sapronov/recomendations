@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import * as recomendationActions from '../actions/recomendation';
 
+import Embed from '../components/embed';
+
 import Card from 'material-ui/lib/card/card';
 import CardHeader from 'material-ui/lib/card/card-header';
 import CardText from 'material-ui/lib/card/card-text';
@@ -50,11 +52,12 @@ class Recommendation extends Component {
                    subtitle="Subtitle"
                    avatar={`http://graph.facebook.com/${this.props._user.providerId}/picture`}
                 />
-                <CardMedia>
+                { this.props.imageName ? <CardMedia>
                     <img src={this.props.image} />
-                </CardMedia>
+                </CardMedia> : ''}
                 <CardText>
-                    {this.props.content}
+                    {this.props.linkedContent ?<div dangerouslySetInnerHTML={{__html: this.props.linkedContent}} /> : '' }
+                    {this.props.data.map(item => <Embed {...item} />)}
                 </CardText>
                 <CardActions>
                     <FlatButton onClick={this.handleDislike.bind(this)} label="dislike"/>

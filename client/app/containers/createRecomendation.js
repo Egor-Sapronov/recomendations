@@ -48,11 +48,7 @@ export class CreateRecomendation extends Component {
 
   render() {
       return (<div>
-              <div>{this.state.image ? <img style={{width: '200px', height: '200px'}} src={this.state.image.preview} /> : ''}</div>
-              <RaisedButton label="Choose an image">
-                <Dropzone multiple={false} style={style} onDrop={ this.onDrop.bind(this) } />
-              </RaisedButton>
-              <TextField hintText="Text" multiLine onChange={this.handleContentChange.bind(this)}/>
+              <TextField rows={3} fullWidth hintText="Text" multiLine onChange={this.handleContentChange.bind(this)}/>
               <br/>
               <FloatingActionButton onClick={this.handleClick.bind(this)}>
                 <FontIcon className="material-icons">add</FontIcon>

@@ -6,12 +6,16 @@ const Recomendation = new Schema({
         type: String,
         required: true,
     },
+    linkedContent: {
+        type: String,
+    },
     image: {
         type: String,
     },
     imageName: {
         type: String,
     },
+    data: [],
     _user: {
         type: Schema.Types.ObjectId,
         ref: 'User',
