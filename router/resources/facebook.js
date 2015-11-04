@@ -4,7 +4,7 @@ const passport = require('../../libs/auth/auth');
 router.get('/facebook',
     passport.authenticate('facebook', {
         session: false,
-        scope: ['email', 'public_profile'],
+        scope: ['email', 'public_profile', 'user_friends'],
     }));
 
 router.get('/facebook/callback',

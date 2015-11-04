@@ -3,11 +3,20 @@ import {connect} from 'react-redux';
 import * as authActions from '../actions/auth';
 import Navbar from '../components/navbar';
 import LayoutContent from '../components/layoutContent';
+
 class App extends Component {
     static propTypes = {
         children: PropTypes.node,
         dispatch: PropTypes.func,
         user: PropTypes.object,
+    }
+
+    componentDidMount() {
+        componentHandler.upgradeDom();
+    }
+
+    componentDidUpdate() {
+        componentHandler.upgradeDom();
     }
 
     componentWillMount() {
@@ -16,8 +25,8 @@ class App extends Component {
 
     render() {
         return (
-            <div>
-                <Navbar user={ this.props.user.displayName } />
+            <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+                <Navbar user={ this.props.user } />
                 <LayoutContent children={ this.props.children } />
             </div>
         );

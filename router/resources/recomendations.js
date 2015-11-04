@@ -1,5 +1,5 @@
 'use strict';
-
+const ObjectId = require('mongoose').Types.ObjectId;
 const router = require('express').Router();
 const db = require('../../libs/database/mongoose');
 const multer = require('multer');
@@ -106,7 +106,10 @@ router.post('/recomendations',
                     .then(resoponse => resoponse.json());
             }))
             .then(results => {
-                recomendation.data = results;
+                recomendation.data = results.map(item=>{
+                    item._id = new ObjectId();
+                    return item;
+                });
 
                 recomendation.save(error => {
                     if (error) {

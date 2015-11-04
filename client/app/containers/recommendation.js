@@ -50,14 +50,14 @@ class Recommendation extends Component {
                 <CardHeader
                    title={this.props._user.displayName}
                    subtitle="Subtitle"
-                   avatar={`http://graph.facebook.com/${this.props._user.providerId}/picture`}
+                   avatar={`http://graph.facebook.com/${this.props._user.providerId}/picture?&type=large`}
                 />
                 { this.props.imageName ? <CardMedia>
-                    <img src={this.props.image} />
+                    <img style={{maxWidth:'200px', height: 'auto'}} src={this.props.image} />
                 </CardMedia> : ''}
                 <CardText>
                     {this.props.linkedContent ?<div dangerouslySetInnerHTML={{__html: this.props.linkedContent}} /> : '' }
-                    {this.props.data.map(item => <Embed {...item} />)}
+                    {this.props.data.map(item => <Embed key={ item._id } {...item} />)}
                 </CardText>
                 <CardActions>
                     <FlatButton onClick={this.handleDislike.bind(this)} label="dislike"/>

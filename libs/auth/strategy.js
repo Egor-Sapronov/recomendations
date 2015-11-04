@@ -21,6 +21,7 @@ function assignToken(user, facebookToken) {
 }
 
 function facebook(accessToken, refreshToken, profile, done) {
+    console.log(profile);
   return UserModel
     .findOne({ providerId: profile.id })
     .then(user=> {
