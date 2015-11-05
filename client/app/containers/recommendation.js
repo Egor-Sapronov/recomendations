@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import * as recomendationActions from '../actions/recomendation';
+import { Link } from 'react-router';
 
 import Embed from '../components/embed';
 
@@ -47,13 +48,16 @@ class Recommendation extends Component {
 
         if (screen===RECOMENDATION){
             displayScreen = <Card>
-                <CardHeader
-                   title={this.props._user.displayName}
-                   subtitle="Subtitle"
-                   avatar={`http://graph.facebook.com/${this.props._user.providerId}/picture?&type=large`}
-                />
+                <Link to={`/profile/${this.props._user._id}`}>
+                    <CardHeader
+                        title={this.props._user.displayName}
+                        subtitle="Subtitle"
+                        avatar={`http://graph.facebook.com/${this.props._user.providerId}/picture?&type=large`}
+                    />
+                </Link>
+
                 { this.props.imageName ? <CardMedia>
-                    <img style={{maxWidth:'200px', height: 'auto'}} src={this.props.image} />
+                        <img style={{maxWidth:'200px', height: 'auto'}} src={this.props.image} />
                 </CardMedia> : ''}
                 <CardText>
                     {this.props.linkedContent ?<div dangerouslySetInnerHTML={{__html: this.props.linkedContent}} /> : '' }

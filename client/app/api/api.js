@@ -1,12 +1,12 @@
-import request, {getHeaders} from './request';
+import request, { getHeaders } from './request';
 
 const URL = {
     recomendations: '/api/recomendations',
+    profiles: '/api/profiles',
     auth: '/api/auth',
     userinfo: '/api/users/me',
     nextRecomandation: '/api/recomendations/next',
 };
-
 
 export const api = {
     like(id) {
@@ -16,7 +16,6 @@ export const api = {
         })
         .then(response => response.like);
     },
-
     dislike(id) {
         return request(`${URL.recomendations}/${id}/dislikes`, {
             method: 'POST',
@@ -24,7 +23,6 @@ export const api = {
         })
         .then(response => response.like);
     },
-
     next() {
         return request(URL.nextRecomandation, {
             method: 'GET',
@@ -32,7 +30,13 @@ export const api = {
         })
         .then(response => response.recomendation);
     },
-
+    profile(id = 'me') {
+        return request(`${URL.profiles}/${id}`, {
+            method: 'GET',
+            headers: getHeaders(),
+        })
+        .then(response => response.profile);
+    },
     userifno() {
         return request(URL.userinfo, {
             method: 'GET',
@@ -40,22 +44,21 @@ export const api = {
         })
         .then(response => response.user);
     },
-
     postRecomendation({
-    image,
-    content,
-  }) {
-    const formData = new FormData();
+        image,
+        content,
+    }) {
+        const formData = new FormData();
 
-    formData.append('image', image);
-    if (content) {
-        formData.append('content', content);
-    }
+        formData.append('image', image);
+        if (content) {
+            formData.append('content', content);
+        }
 
-    return request(URL.recomendations, {
-      method: 'POST',
-      headers: getHeaders(),
-      body: formData,
-    });
-  },
+        return request(URL.recomendations, {
+            method: 'POST',
+            headers: getHeaders(),
+            body: formData,
+        });
+    },
 };

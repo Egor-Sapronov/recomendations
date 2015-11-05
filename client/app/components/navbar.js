@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import {IndexLink, Link} from 'react-router';
 import Avatar from 'material-ui/lib/avatar';
-import FlatButton from 'material-ui/lib/flat-button';
 import FontIcon from 'material-ui/lib/font-icon';
-import IconButton from 'material-ui/lib/icon-button';
 import FloatingActionButton from 'material-ui/lib/floating-action-button';
 import Paper from 'material-ui/lib/paper';
 
