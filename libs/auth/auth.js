@@ -29,6 +29,17 @@ passport.use(new FaceBookStrategy({
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
     callbackURL: process.env.FACEBOOK_CALLBACK_URL,
+    profileFields: [
+        'id',
+        'displayName',
+        'link',
+        'photos',
+        'about',
+        'birthday',
+        'hometown',
+        'email',
+        'location',
+    ],
 }, facebook));
 passport.use(new BearerStrategy(bearer));
 
