@@ -35,5 +35,8 @@ export const getProfile = (id) => (dispatch) => {
         .profile(id)
         .then(profile => {
             return dispatch(getProfileSuccess(profile));
+        })
+        .catch(error => {
+            return dispatch(getProfileFailure(error));
         });
 };

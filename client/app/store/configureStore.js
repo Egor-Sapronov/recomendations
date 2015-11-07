@@ -3,6 +3,7 @@ import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
 import rootReducer from '../reducers/root';
 import redirector from '../middlewares/redirector';
+import errors from '../middlewares/errors';
 
 const loggerMiddleware = createLogger({
     level: 'info',
@@ -10,7 +11,12 @@ const loggerMiddleware = createLogger({
     collapsed: true,
 });
 
-const createStoreWithMiddleware = compose(applyMiddleware(thunkMiddleware, loggerMiddleware, redirector))(createStore);
+const createStoreWithMiddleware = compose(applyMiddleware(
+    thunkMiddleware,
+    loggerMiddleware,
+    redirector,
+    errors,
+))(createStore);
 
 export default function configureStore(initialState = {}) {
     const store = createStoreWithMiddleware(rootReducer, initialState);

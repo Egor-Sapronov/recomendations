@@ -23,24 +23,27 @@ export default class Navbar extends Component {
             <header className="mdl-layout__header">
                 <div className="mdl-layout__header-row">
                     <span className="mdl-layout-title">Recomea</span>
-                <div className="mdl-layout-spacer" />
-                <nav className="mdl-navigation mdl-layout--large-screen-only">
-                    <Link to="/create">
-                        <FloatingActionButton mini style={{marginRight: '10px'}}>
-                            <FontIcon className="material-icons">create</FontIcon>
-                        </FloatingActionButton>
-                    </Link>
-                    <Link to="/profile">
-                        <Paper circle zDepth={2}>
-                            <Avatar style={{width:'40px', height:'40px'}} src={`http://graph.facebook.com/${this.props.user.providerId}/picture?&type=large`} />
-                        </Paper>
-                    </Link>
-                </nav>
-                </div>
-                <div className="mdl-layout--large-screen-only" style={{paddingLeft: '56px'}} >
-                    <IndexLink to="/" className="mdl-layout__tab" activeClassName="mdl-layout__tab is-active">Home</IndexLink>
-                    <Link to="/top" className="mdl-layout__tab" activeClassName="mdl-layout__tab is-active">Top</Link>
-                    <Link to="/likes" className="mdl-layout__tab" activeClassName="mdl-layout__tab is-active">Likes</Link>
+                    <nav className="mdl-navigation mdl-layout--large-screen-only">
+                        <IndexLink to="/" className="mdl-navigation__link">Home</IndexLink>
+                        <Link to="/top" className="mdl-navigation__link">Top</Link>
+                        <Link to="/likes" className="mdl-navigation__link">Likes</Link>
+                    </nav>
+                    <div className="mdl-layout-spacer" />
+                    <div className="mdl-navigation mdl-layout--large-screen-only">
+                        <Link to="/create">
+                            <FloatingActionButton mini style={{marginRight: '10px'}}>
+                                <FontIcon className="material-icons">create</FontIcon>
+                            </FloatingActionButton>
+                        </Link>
+                        <Link to="/profile">
+                            <Paper circle zDepth={2}>
+                                <Avatar
+                                    style={{ width: '40px', height: '40px' }}
+                                    src={`http://graph.facebook.com/${this.props.user.providerId}/picture?&type=large`}
+                                />
+                            </Paper>
+                        </Link>
+                    </div>
                 </div>
             </header>
         );

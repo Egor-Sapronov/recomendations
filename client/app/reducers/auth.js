@@ -15,7 +15,7 @@ export default function auth(state = {}, action) {
         default:
             return {
                 ...state,
-                isAuthenticated: false,
+                isAuthenticated: true,
             };
     }
 }

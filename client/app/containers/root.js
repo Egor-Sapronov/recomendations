@@ -6,6 +6,7 @@ import Recommendation from './recommendation';
 import history from '../utils/history';
 import Profile from './profile';
 import Post from '../components/post';
+import Login from '../components/login';
 
 const EmptyComponent = () => {
     return <div />;
@@ -23,6 +24,7 @@ export const Root = () => {
                     <Route path="top" component={ EmptyComponent } />
                     <Route path="likes" component={ EmptyComponent } />
                     <Route path="recomendation/:id" component={ Post } />
+                    <Route path="login" component={ Login } />
                 </Route>
             </Router>
         </div>
