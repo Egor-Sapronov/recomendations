@@ -22,7 +22,6 @@ passport.deserializeUser((id, done) => {
         });
 });
 
-
 passport.use(new BasicStrategy(local));
 passport.use(new LocalStrategy({}, local));
 passport.use(new FaceBookStrategy({

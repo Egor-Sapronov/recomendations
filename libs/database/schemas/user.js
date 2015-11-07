@@ -20,6 +20,12 @@ const User = new Schema({
     email: {
         type: String,
     },
+    location: {
+        type: String,
+    },
+    birthday: {
+        type: String,
+    },
 });
 
 module.exports = User;

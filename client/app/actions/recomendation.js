@@ -32,6 +32,15 @@ export function createSuccess(recomendation) {
     };
 }
 
+export function getNext() {
+    return (dispatch) => {
+        dispatch(startFetchNext());
+        return api
+            .next()
+            .then(recomendation => dispatch(nextRecomandationSuccess(recomendation)));
+    };
+}
+
 export function like(id) {
     return (dispatch) => {
         return api.like(id)
@@ -53,14 +62,5 @@ export function create(data) {
         return api
             .postRecomendation(data)
             .then(recomendation => dispatch(createSuccess(recomendation)));
-    };
-}
-
-export function getNext() {
-    return (dispatch) => {
-        dispatch(startFetchNext());
-        return api
-            .next()
-            .then(recomendation => dispatch(nextRecomandationSuccess(recomendation)));
     };
 }

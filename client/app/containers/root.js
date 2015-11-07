@@ -3,8 +3,9 @@ import {Route, Router, IndexRoute} from 'react-router';
 import CreateRecomendation from './createRecomendation';
 import App from './app';
 import Recommendation from './recommendation';
-import createBrowserHistory from 'history/lib/createBrowserHistory';
+import history from '../utils/history';
 import Profile from './profile';
+import Post from '../components/post';
 
 const EmptyComponent = () => {
     return <div />;
@@ -13,7 +14,7 @@ const EmptyComponent = () => {
 export const Root = () => {
     return (
         <div>
-            <Router history={ createBrowserHistory() } >
+            <Router history={ history } >
                 <Route path="/" component={ App } >
                     <IndexRoute component={ Recommendation } />
                     <Route path="profile" component={ Profile } />
@@ -21,6 +22,7 @@ export const Root = () => {
                     <Route path="create" component={ CreateRecomendation } />
                     <Route path="top" component={ EmptyComponent } />
                     <Route path="likes" component={ EmptyComponent } />
+                    <Route path="recomendation/:id" component={ Post } />
                 </Route>
             </Router>
         </div>

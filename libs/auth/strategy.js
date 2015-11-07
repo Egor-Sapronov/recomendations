@@ -32,7 +32,9 @@ function facebook(accessToken, refreshToken, profile, done) {
                 profileLink: profile.profileUrl,
                 displayName: profile.displayName,
                 name: profile._json.name,
+                location: profile._json.location ? profile._json.location.name : null,
                 email: profile._json.email,
+                birthday: profile._json.birthday,
             });
 
             return userEntity.save(err => {

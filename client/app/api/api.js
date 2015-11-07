@@ -44,21 +44,11 @@ export const api = {
         })
         .then(response => response.user);
     },
-    postRecomendation({
-        image,
-        content,
-    }) {
-        const formData = new FormData();
-
-        formData.append('image', image);
-        if (content) {
-            formData.append('content', content);
-        }
-
+    postRecomendation({ content }) {
         return request(URL.recomendations, {
             method: 'POST',
             headers: getHeaders(),
-            body: formData,
+            body: JSON.stringify({content}),
         });
     },
 };
