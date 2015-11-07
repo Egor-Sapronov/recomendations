@@ -1,5 +1,5 @@
 import React from 'react';
-import CardHeader from 'material-ui/lib/card/card-header'
+import CardHeader from 'material-ui/lib/card/card-header';
 
 const actionStyle = {
     display: 'flex',
