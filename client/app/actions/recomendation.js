@@ -4,6 +4,7 @@ import { errorSymbol, loadingSymbol } from '../utils/symbols';
 
 export const RECOMENDATION_CREATE_START = 'RECOMENDATION_CREATE_START';
 export const RECOMENDATION_CREATE_SUCCESS = 'RECOMENDATION_CREATE_SUCCESS';
+export const RECOMENDATION_CREATE_FAILURE = 'RECOMENDATION_CREATE_FAILURE';
 export const START_FETCH_NEXT = 'START_FETCH_NEXT';
 export const NEXT_RECOMENDATION_SUCCESS = 'NEXT_RECOMENDATION_SUCCESS';
 export const RECOMENDATION_FAILURE = 'RECOMENDATION_FAILURE';
@@ -55,6 +56,14 @@ export function createSuccess(recomendation) {
     };
 }
 
+export function createFailure(error) {
+    return {
+        type: RECOMENDATION_CREATE_FAILURE,
+        [loadingSymbol]: false,
+        [errorSymbol]: error,
+    };
+}
+
 export function recomendationFailure(error) {
     return {
         type: RECOMENDATION_FAILURE,
@@ -99,6 +108,6 @@ export function create(data) {
         return api
             .postRecomendation(data)
             .then(recomendation => dispatch(createSuccess(recomendation)))
-            .catch(error => dispatch(recomendationFailure(error)));
+            .catch(error => dispatch(createFailure(error)));
     };
 }

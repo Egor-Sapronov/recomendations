@@ -30,6 +30,13 @@ export const api = {
         })
         .then(response => response.recomendation);
     },
+    getPost(id) {
+        return request(`${URL.recomendations}/${id}`, {
+            method: 'GET',
+            headers: getHeaders(),
+        })
+        .then(response => response.recomendation);
+    },
     profile(id = 'me') {
         return request(`${URL.profiles}/${id}`, {
             method: 'GET',

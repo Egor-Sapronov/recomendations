@@ -5,7 +5,7 @@ import App from './app';
 import Recommendation from './recommendation';
 import history from '../utils/history';
 import Profile from './profile';
-import Post from '../components/post';
+import Post from '../containers/post';
 import Login from '../components/login';
 
 const EmptyComponent = () => {

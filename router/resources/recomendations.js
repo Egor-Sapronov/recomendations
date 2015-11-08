@@ -8,24 +8,27 @@ const fetch = require('isomorphic-fetch');
 const autolinker = require('autolinker');
 
 router.param('id', (req, res, next, id) => {
-    return db.RecomendationModel.findById(id)
-    .then(recomendation => {
-        if (!recomendation) {
-            logger.error(`recomendation ${id} not found`);
-            return res.status(404).send({
-                Error: 'Not found',
-            });
-        }
+    return db
+        .RecomendationModel
+        .findById(id)
+        .populate('_user')
+        .then(recomendation => {
+            if (!recomendation) {
+                logger.error(`recomendation ${id} not found`);
+                return res.status(404).send({
+                    Error: 'Not found',
+                });
+            }
 
-        req.recomendation = recomendation;
-        return next();
-    })
-    .catch(error => {
-        logger.error(error);
-        return res.status(400).send({
-            Error: 'Client error',
+            req.recomendation = recomendation;
+            return next();
+        })
+        .catch(error => {
+            logger.error(error);
+            return res.status(400).send({
+                Error: 'Client error',
+            });
         });
-    });
 });
 
 router.get('/recomendations/next',
@@ -74,7 +77,7 @@ router.get('/recomendations', (req, res) => {
 });
 
 router.get('/recomendations/:id', (req, res) => {
-    return res.send(req.recomendation);
+    return res.send({recomendation: req.recomendation});
 });
 
 router.post('/recomendations',

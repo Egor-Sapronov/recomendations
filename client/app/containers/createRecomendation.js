@@ -9,11 +9,13 @@ import Card from 'material-ui/lib/card/card';
 import CardTitle from 'material-ui/lib/card/card-title';
 import CardText from 'material-ui/lib/card/card-text';
 import CardActions from 'material-ui/lib/card/card-actions';
+import Loader from '../components/loader';
 
 export class CreateRecomendation extends Component {
     static propTypes() {
         return {
             dispatch: PropTypes.func,
+            isLoading: PropTypes.bool,
         };
     }
 
@@ -33,21 +35,28 @@ export class CreateRecomendation extends Component {
         this.props.dispatch(recomendationActions.create(this.state));
     }
 
-  render() {
-      return (
-            <Card>
-                <CardTitle title="Create new" />
-                <CardText>
-                    <TextField rows={3} fullWidth hintText="Text" multiLine onChange={this.handleContentChange.bind(this)}/>
-                </CardText>
-                <CardActions>
-                    <FloatingActionButton onClick={this.handleClick.bind(this)}>
-                        <FontIcon className="material-icons">send</FontIcon>
-                    </FloatingActionButton>
-                </CardActions>
-            < /Card>
-            );
-  }
+    render() {
+        return (
+            <div>{ this.props.isLoading ? <Loader /> : <Card>
+                    <CardTitle title="Create new" />
+                    <CardText>
+                        <TextField rows={3} fullWidth hintText="Text" multiLine onChange={this.handleContentChange.bind(this)}/>
+                    </CardText>
+                    <CardActions>
+                        <FloatingActionButton onClick={this.handleClick.bind(this)}>
+                            <FontIcon className="material-icons">send</FontIcon>
+                        </FloatingActionButton>
+                    </CardActions>
+                < /Card>
+            }</div>
+        );
+    }
 }
 
-export default connect()(CreateRecomendation);
+function select(state) {
+    return {
+        ...state.create,
+    };
+}
+
+export default connect(select)(CreateRecomendation);
