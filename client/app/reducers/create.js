@@ -1,18 +1,53 @@
-import * as recomendationActions from '../actions/recomendation';
+import * as createActions from '../actions/create';
 import {loadingSymbol, errorSymbol} from '../utils/symbols';
 
-export default function post(state = {}, action) {
+const defaultState = {
+    preview: {
+        data: [],
+    },
+};
+
+export default function post(state = defaultState, action) {
     switch (action.type) {
-        case recomendationActions.RECOMENDATION_CREATE_START:
+        case createActions.PREVIEW_FETCH_START:
             return {
+                ...state,
+                preview: {
+                    ...state.preview,
+                    isLoading: action[loadingSymbol],
+                },
+            };
+        case createActions.PREVIEW_FETCH_SUCCESS:
+            return {
+                ...state,
+                preview: {
+                    ...state.preview,
+                    isLoading: action[loadingSymbol],
+                    data: action.data,
+                },
+            };
+        case createActions.PREVIEW_FETCH_FAILURE:
+            return {
+                ...state,
+                preview: {
+                    ...state.preview,
+                    isLoading: action[loadingSymbol],
+                    error: action[errorSymbol],
+                },
+            };
+        case createActions.RECOMENDATION_CREATE_START:
+            return {
+                ...state,
                 isLoading: action[loadingSymbol],
             };
-        case recomendationActions.RECOMENDATION_CREATE_SUCCESS:
+        case createActions.RECOMENDATION_CREATE_SUCCESS:
             return {
+                ...state,
                 isLoading: action[loadingSymbol],
             };
-        case recomendationActions.RECOMENDATION_CREATE_FAILURE:
+        case createActions.RECOMENDATION_CREATE_FAILURE:
             return {
+                ...state,
                 isLoading: action[loadingSymbol],
                 error: action[errorSymbol],
             };

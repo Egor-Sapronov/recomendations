@@ -2,9 +2,6 @@ import { api } from '../api/api';
 
 import { errorSymbol, loadingSymbol } from '../utils/symbols';
 
-export const RECOMENDATION_CREATE_START = 'RECOMENDATION_CREATE_START';
-export const RECOMENDATION_CREATE_SUCCESS = 'RECOMENDATION_CREATE_SUCCESS';
-export const RECOMENDATION_CREATE_FAILURE = 'RECOMENDATION_CREATE_FAILURE';
 export const START_FETCH_NEXT = 'START_FETCH_NEXT';
 export const NEXT_RECOMENDATION_SUCCESS = 'NEXT_RECOMENDATION_SUCCESS';
 export const RECOMENDATION_FAILURE = 'RECOMENDATION_FAILURE';
@@ -38,29 +35,6 @@ export function likeSuccess(likeValue) {
         type: LIKE_SUCCESS,
         [loadingSymbol]: false,
         like: likeValue,
-    };
-}
-
-export function createStart() {
-    return {
-        type: RECOMENDATION_CREATE_START,
-        [loadingSymbol]: true,
-    };
-}
-
-export function createSuccess(recomendation) {
-    return {
-        type: RECOMENDATION_CREATE_SUCCESS,
-        [loadingSymbol]: false,
-        recomendation,
-    };
-}
-
-export function createFailure(error) {
-    return {
-        type: RECOMENDATION_CREATE_FAILURE,
-        [loadingSymbol]: false,
-        [errorSymbol]: error,
     };
 }
 
@@ -99,15 +73,5 @@ export function dislike(id) {
             .then(likeValue => dispatch(likeSuccess(likeValue)))
             .then(() => dispatch(getNext()))
             .catch(error => dispatch(recomendationFailure(error)));
-    };
-}
-
-export function create(data) {
-    return (dispatch) => {
-        dispatch(createStart());
-        return api
-            .postRecomendation(data)
-            .then(recomendation => dispatch(createSuccess(recomendation)))
-            .catch(error => dispatch(createFailure(error)));
     };
 }

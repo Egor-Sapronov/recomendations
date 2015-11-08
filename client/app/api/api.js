@@ -2,6 +2,7 @@ import request, { getHeaders } from './request';
 
 const URL = {
     recomendations: '/api/recomendations',
+    preview: '/api/preview',
     profiles: '/api/profiles',
     auth: '/api/auth',
     userinfo: '/api/users/me',
@@ -51,11 +52,18 @@ export const api = {
         })
         .then(response => response.user);
     },
-    postRecomendation({ content }) {
+    getPreview(content) {
+        return request(`${URL.preview}?preview=${encodeURI(content)}`, {
+            method: 'GET',
+            headers: getHeaders(),
+        })
+        .then(response => response.data);
+    },
+    postRecomendation(data) {
         return request(URL.recomendations, {
             method: 'POST',
             headers: getHeaders(),
-            body: JSON.stringify({content}),
+            body: JSON.stringify(data),
         });
     },
 };

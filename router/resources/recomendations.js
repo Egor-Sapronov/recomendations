@@ -1,10 +1,8 @@
-const ObjectId = require('mongoose').Types.ObjectId;
 const router = require('express').Router();
 const db = require('../../libs/database/mongoose');
 const logger = require('../../libs/logger/logger')('api::recomendations');
 const passport = require('../../libs/auth/auth');
 const getUrls = require('get-urls');
-const fetch = require('isomorphic-fetch');
 const autolinker = require('autolinker');
 
 router.param('id', (req, res, next, id) => {
@@ -87,33 +85,20 @@ router.post('/recomendations',
     const recomendation = new db.RecomendationModel({
         content: req.body.content,
         linkedContent: autolinker.link(req.body.content),
+        data: req.body.data,
         _user: req.user,
     });
 
-    const urls = getUrls(recomendation.content);
-
-    return Promise
-        .all(urls.map(item => {
-            return fetch(`http://api.embed.ly/1/oembed?key=${process.env.EMBED_API_KEY}&url=${item}`)
-            .then(resoponse => resoponse.json());
-        }))
-        .then(results => {
-            recomendation.data = results.map(item=>{
-                item._id = new ObjectId();
-                return item;
+    return recomendation.save(error => {
+        if (error) {
+            logger.error(error);
+            res.statusCode = 400;
+            return res.send({
+                'Error': 'Client error',
             });
-
-            recomendation.save(error => {
-                if (error) {
-                    logger.error(error);
-                    res.statusCode = 400;
-                    return res.send({
-                        'Error': 'Client error',
-                    });
-                }
-                return res.send(recomendation);
-            });
-        });
+        }
+        return res.send(recomendation);
+    });
 });
 
 module.exports = router;

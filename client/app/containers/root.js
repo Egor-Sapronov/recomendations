@@ -7,6 +7,7 @@ import history from '../utils/history';
 import Profile from './profile';
 import Post from '../containers/post';
 import Login from '../components/login';
+import Create from '../containers/create';
 
 const EmptyComponent = () => {
     return <div />;
@@ -20,7 +21,7 @@ export const Root = () => {
                     <IndexRoute component={ Recommendation } />
                     <Route path="profile" component={ Profile } />
                     <Route path="profile/:id" component={ Profile } />
-                    <Route path="create" component={ CreateRecomendation } />
+                    <Route path="create" component={ Create } />
                     <Route path="top" component={ EmptyComponent } />
                     <Route path="likes" component={ EmptyComponent } />
                     <Route path="recomendation/:id" component={ Post } />
