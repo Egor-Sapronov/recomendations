@@ -22,6 +22,14 @@ class Post extends Component {
         this.props.dispatch(fetchPost(this.props.params.id));
     }
 
+    componentDidMount() {
+        componentHandler.upgradeDom();
+    }
+
+    componentDidUpdate() {
+        componentHandler.upgradeDom();
+    }
+
     render() {
         return (
             <div>{ this.props.isLoading ? <Loader /> :

@@ -6,14 +6,13 @@ const db = require('../libs/database/mongoose');
 router.use('/', facebook);
 router.use('/api', api);
 
-router.get('/login', (req, res) => res.render('index'));
+// router.get('/login', (req, res) => res.render('index'));
 
-router.get('*', (req, res, next) => {
-    if (req.isAuthenticated()) {
-        return next();
+router.get('*', (req, res) => {
+    if (!req.user) {
+        return res.render('index');
     }
-    return res.redirect('/login');
-}, (req, res) => {
+
     return db
         .TokenModel
         .findOne({

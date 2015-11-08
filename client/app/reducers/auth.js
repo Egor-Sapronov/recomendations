@@ -1,6 +1,26 @@
 import * as authActions from '../actions/auth';
+import { errorSymbol } from '../utils/symbols';
 
-export default function auth(state = {}, action) {
+const tokenValue = localStorage.getItem('token');
+
+function getInitialStore(token) {
+    return {
+        isAuthenticated: !(token === null || token === ''),
+    };
+}
+
+export default function auth(state = getInitialStore(tokenValue), action) {
+    if (action[errorSymbol]) {
+        if (action[errorSymbol].response) {
+            if (action[errorSymbol].response.status === 401) {
+                return {
+                    ...state,
+                    isAuthenticated: false,
+                };
+            }
+        }
+    }
+
     switch (action.type) {
         case authActions.USERINFO_SUCCESS:
             return {
@@ -15,7 +35,6 @@ export default function auth(state = {}, action) {
         default:
             return {
                 ...state,
-                isAuthenticated: true,
             };
     }
 }

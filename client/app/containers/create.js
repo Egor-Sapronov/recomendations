@@ -45,7 +45,11 @@ export class CreateRecomendation extends Component {
                         hintText="Text"
                         multiLine onChange={ this.handleContentChange.bind(this) }
                     />
-                    <CreateButton title="create" onClick={ this.handleClick.bind(this) } />
+                    <CreateButton
+                        title="create"
+                        onClick={ this.handleClick.bind(this) }
+                        disabled={ this.props.preview.isLoading }
+                    />
                     { this.props.preview.isLoading ? <Loader /> : <Preview {...this.props.preview} /> }
                 </div>
             }</div>

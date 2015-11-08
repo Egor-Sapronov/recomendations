@@ -1,25 +1,34 @@
 import { api } from '../api/api';
-
 import { errorSymbol, loadingSymbol } from '../utils/symbols';
 
-export const START_FETCH_NEXT = 'START_FETCH_NEXT';
-export const NEXT_RECOMENDATION_SUCCESS = 'NEXT_RECOMENDATION_SUCCESS';
-export const RECOMENDATION_FAILURE = 'RECOMENDATION_FAILURE';
+export const FETCH_NEXT_RECOMENDATION_START = 'FETCH_NEXT_RECOMENDATION_START';
+export const FETCH_NEXT_RECOMENDATION_SUCCESS = 'FETCH_NEXT_RECOMENDATION_SUCCESS';
+export const FETCH_NEXT_RECOMENDATION_FAILURE = 'FETCH_NEXT_RECOMENDATION_FAILURE';
+
 export const LIKE_SUCCESS = 'LIKE_SUCCESS';
 export const LIKE_START = 'LIKE_START';
+export const LIKE_FAILURE = 'LIKE_FAILURE';
 
-export function startFetchNext() {
+export function nextStart() {
     return {
-        type: START_FETCH_NEXT,
+        type: FETCH_NEXT_RECOMENDATION_START,
         [loadingSymbol]: true,
     };
 }
 
-export function nextRecomandationSuccess(recomendation) {
+export function nextSuccess(recomendation) {
     return {
-        type: NEXT_RECOMENDATION_SUCCESS,
+        type: FETCH_NEXT_RECOMENDATION_SUCCESS,
         [loadingSymbol]: false,
         recomendation,
+    };
+}
+
+export function nextFailure(error) {
+    return {
+        type: FETCH_NEXT_RECOMENDATION_FAILURE,
+        [loadingSymbol]: false,
+        [errorSymbol]: error,
     };
 }
 
@@ -38,21 +47,21 @@ export function likeSuccess(likeValue) {
     };
 }
 
-export function recomendationFailure(error) {
+export function likeFailure(error) {
     return {
-        type: RECOMENDATION_FAILURE,
-        [errorSymbol]: error,
+        type: LIKE_FAILURE,
         [loadingSymbol]: false,
+        [errorSymbol]: error,
     };
 }
 
 export function getNext() {
     return (dispatch) => {
-        dispatch(startFetchNext());
+        dispatch(nextStart());
         return api
             .next()
-            .then(recomendation => dispatch(nextRecomandationSuccess(recomendation)))
-            .catch(error => dispatch(recomendationFailure(error)));
+            .then(recomendation => dispatch(nextSuccess(recomendation)))
+            .catch(error => dispatch(nextFailure(error)));
     };
 }
 
@@ -62,7 +71,7 @@ export function like(id) {
         return api.like(id)
             .then(likeValue => dispatch(likeSuccess(likeValue)))
             .then(() => dispatch(getNext()))
-            .catch(error => dispatch(recomendationFailure(error)));
+            .catch(error => dispatch(likeFailure(error)));
     };
 }
 
@@ -72,6 +81,6 @@ export function dislike(id) {
         return api.dislike(id)
             .then(likeValue => dispatch(likeSuccess(likeValue)))
             .then(() => dispatch(getNext()))
-            .catch(error => dispatch(recomendationFailure(error)));
+            .catch(error => dispatch(likeFailure(error)));
     };
 }

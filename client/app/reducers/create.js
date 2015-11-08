@@ -53,7 +53,7 @@ export default function post(state = defaultState, action) {
             };
         default:
             return {
-                ...state,
+                ...defaultState,
             };
     }
 }

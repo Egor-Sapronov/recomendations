@@ -18,7 +18,7 @@ export function getHeaders() {
     return {
         'Accept': 'application/json',
         'Content-type': 'application/json',
-        'Authorization': `Bearer ${token}`,
+        'Authorization': token ? `Bearer ${token}` : '',
     };
 }
 

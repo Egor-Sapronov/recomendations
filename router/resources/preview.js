@@ -11,7 +11,7 @@ passport.authenticate('bearer', {
     const urls = getUrls(req.query.preview);
     return Promise
         .all(urls.map(item => {
-            return fetch(`http://api.embed.ly/1/oembed?key=${process.env.EMBED_API_KEY}&url=${item}`)
+            return fetch(`http://api.embed.ly/1/oembed?key=${process.env.EMBED_API_KEY}&url=${item}&luxe=1`)
                 .then(resoponse => resoponse.json());
         }))
         .then(data => res.send({data: data.map(item => {
