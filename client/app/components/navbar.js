@@ -39,7 +39,7 @@ export default class Navbar extends Component {
                             <Paper circle zDepth={2}>
                                 <Avatar
                                     style={{ width: '40px', height: '40px' }}
-                                    src={`http://graph.facebook.com/${this.props.user.providerId}/picture?&type=large`}
+                                    src={`https://graph.facebook.com/${this.props.user.providerId}/picture?&type=large`}
                                 />
                             </Paper>
                         </Link>

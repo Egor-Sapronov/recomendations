@@ -8,7 +8,7 @@ export default props => {
             <Avatar
                 className="mdl-shadow--4dp"
                 style={{width: '200px', height: '200px'}}
-                src={`http://graph.facebook.com/${props.providerId}/picture?width=1000&height=1000`}
+                src={`https://graph.facebook.com/${props.providerId}/picture?width=1000&height=1000`}
             />
             <div className="mdl-layout-spacer" />
         </div>
