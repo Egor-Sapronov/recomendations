@@ -4,12 +4,14 @@ import {connect} from 'react-redux';
 import ProfileAvatar from '../components/profileAvatar';
 import ProfileDisplayName from '../components/profileDisplayName';
 import Loader from '../components/loader';
+import ProfilePosts from '../components/profilePosts';
 
 class Profile extends Component {
     static propTypes = {
         dispatch: PropTypes.func.isRequired,
         params: PropTypes.object,
         isLoading: PropTypes.bool.isRequired,
+        data: PropTypes.object.isRequired,
     }
 
     constructor(props) {
@@ -18,6 +20,7 @@ class Profile extends Component {
 
     componentWillMount() {
         this.props.dispatch(profileActions.getProfile(this.props.params.id));
+        this.props.dispatch(profileActions.getProfilePosts(this.props.params.id));
     }
 
     render() {
@@ -26,6 +29,7 @@ class Profile extends Component {
                 <div>
                     <ProfileAvatar {...this.props} />
                     <ProfileDisplayName {...this.props} />
+                    <ProfilePosts {...this.props.data} />
                 </div>}</div>
         );
     }

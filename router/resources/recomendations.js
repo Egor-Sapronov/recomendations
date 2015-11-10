@@ -29,6 +29,23 @@ router.param('id', (req, res, next, id) => {
         });
 });
 
+router.get('/users/me/posts',
+passport.authenticate('bearer', {
+    session: false,
+}), (req, res) => {
+    return db
+        .RecomendationModel
+        .find({_user: req.user._id})
+        .then(recomendations => res.send({posts: recomendations}));
+});
+
+router.get('/users/:userId/posts', (req, res) => {
+    return db
+        .RecomendationModel
+        .find({_user: req.params._userId})
+        .then(recomendations => res.send({posts: recomendations}));
+});
+
 router.get('/recomendations/next',
 passport.authenticate('bearer', {
     session: false,

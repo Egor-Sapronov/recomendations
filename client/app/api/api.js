@@ -5,6 +5,7 @@ const URL = {
     preview: '/api/preview',
     profiles: '/api/profiles',
     auth: '/api/auth',
+    users: '/api/users',
     userinfo: '/api/users/me',
     nextRecomandation: '/api/recomendations/next',
 };
@@ -65,5 +66,12 @@ export const api = {
             headers: getHeaders(),
             body: JSON.stringify(data),
         });
+    },
+    profilePosts(id = 'me') {
+        return request(`${URL.users}/${id}/posts`, {
+            method: 'GET',
+            headers: getHeaders(),
+        })
+        .then(response => response.posts);
     },
 };
