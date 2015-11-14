@@ -57,7 +57,7 @@ class Next extends Component {
 
         return (
             <div>{ this.props.isLoading ? <Loader /> :
-                    <div style={{width: '100%'}} className="mdl-card mdl-shadow--2dp">
+                    <div style={{width: '100%'}} className="mdl-card">
                         <PostHeader { ...this.props._user } />
                         <PostShare />
                         <PostContent { ...this.props } />

@@ -1,11 +1,12 @@
 import React from 'react';
-import Loader from '../components/loader';
+import Loader from './loader';
+import PostPreview from './postPreview';
 
-export default (props) => {
+export default ({posts, isLoading}) => {
     return (
-        <div>{props.isLoading ? <Loader /> :
+        <div>{isLoading ? <Loader /> :
             <div>
-                {props.posts.map(item => <div key={item._id}>{item._id}</div>)}
+                {posts.map(item => <PostPreview key={item._id} {...item} />)}
             </div>}</div>
     );
 };

@@ -36,6 +36,7 @@ passport.authenticate('bearer', {
     return db
         .RecomendationModel
         .find({_user: req.user._id})
+        .populate('_user')
         .then(recomendations => res.send({posts: recomendations}));
 });
 
@@ -43,6 +44,7 @@ router.get('/users/:userId/posts', (req, res) => {
     return db
         .RecomendationModel
         .find({_user: req.params._userId})
+        .populate('_user')
         .then(recomendations => res.send({posts: recomendations}));
 });
 
