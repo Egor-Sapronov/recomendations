@@ -7,6 +7,7 @@ import snack from './snack';
 import post from './post';
 import create from './create';
 import likes from './likes';
+import top from './top';
 
 const rootReducer = combineReducers({
     user,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
     post,
     create,
     likes,
+    top,
 });
 
 export default rootReducer;

@@ -1,13 +1,13 @@
-import * as likesActions from '../actions/likes';
+import * as topActions from '../actions/top';
 import {loadingSymbol} from '../utils/symbols';
 
-export default function likes(state = {isLoading: true}, action) {
+export default function top(state = {isLoading: true}, action) {
     switch (action.type) {
-        case likesActions.FETCH_LIKES_START:
+        case topActions.FETCH_TOP_START:
             return {
                 isLoading: action[loadingSymbol],
             };
-        case likesActions.FETCH_LIKES_SUCCESS:
+        case topActions.FETCH_TOP_SUCCESS:
             return {
                 isLoading: action[loadingSymbol],
                 posts: action.posts,

@@ -9,6 +9,7 @@ const URL = {
     userinfo: '/api/users/me',
     nextRecomandation: '/api/recomendations/next',
     likes: '/api/recomendations/likes',
+    top: '/api/recomendations/top',
 };
 
 export const api = {
@@ -77,6 +78,13 @@ export const api = {
     },
     likes() {
         return request(URL.likes, {
+            method: 'GET',
+            headers: getHeaders(),
+        })
+        .then(response => response.posts);
+    },
+    top() {
+        return request(URL.top, {
             method: 'GET',
             headers: getHeaders(),
         })

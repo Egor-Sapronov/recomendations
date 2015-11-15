@@ -48,7 +48,17 @@ router.get('/users/:userId/posts', (req, res) => {
         .then(recomendations => res.send({posts: recomendations}));
 });
 
-router.get('/recomendations/likes', passport.authenticate('bearer', {
+router.get('/recomendations/top',
+(req, res) => {
+    return db
+        .RecomendationModel
+        .find()
+        .populate('_user')
+        .then(recomendations => res.send({ posts: recomendations.sort((one, two) => one.weight < two.weight)}));
+});
+
+router.get('/recomendations/likes',
+passport.authenticate('bearer', {
     session: false,
 }), (req,res) => {
     return db

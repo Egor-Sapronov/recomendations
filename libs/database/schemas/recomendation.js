@@ -33,14 +33,21 @@ Recomendation
     });
 
 Recomendation
+    .virtual('weight')
+    .get(function() {
+        return this.likesCount === 0 ?  0 : this.dislikesCount === 0 ? this.likesCount : this.likesCount / this.dislikesCount;
+    });
+
+Recomendation
+    .virtual('dislikesCount')
+    .get(function() {
+        return this.likes.reduce((count, like) => like.value ? count : count += 1, 0);
+    });
+
+Recomendation
     .virtual('likesCount')
     .get(function() {
-        return this.likes.reduce((count, like) => {
-            if (like.value === true) {
-                count += 1;
-            }
-            return count;
-        }, 0);
+        return this.likes.reduce((count, like) => like.value ? count += 1 : count, 0);
     });
 
 module.exports = Recomendation;
