@@ -20,12 +20,11 @@ export default ({user}) => {
                 </button>
             </Link>
             <Link to="/profile">
-                <Paper circle zDepth={1}>
-                    <Avatar
-                        style={{ width: '40px', height: '40px' }}
-                        src={`https://graph.facebook.com/${user.providerId}/picture?&type=large`}
-                    />
-                </Paper>
+                <Avatar
+                    className="mdl-shadow--2dp"
+                    style={{ width: '40px', height: '40px' }}
+                    src={`https://graph.facebook.com/${user.providerId}/picture?&type=large`}
+                />
             </Link>
         </div>
     );
