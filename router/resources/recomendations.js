@@ -54,7 +54,15 @@ router.get('/recomendations/top',
         .RecomendationModel
         .find()
         .populate('_user')
-        .then(recomendations => res.send({ posts: recomendations.sort((one, two) => one.weight < two.weight)}));
+        .then(recomendations => res.send({ posts: recomendations.sort((one, two) => {
+            if (one.weight > two.weight) {
+                return 1;
+            }
+            if (one.weight < two.weight) {
+                return -1;
+            }
+            return 0;
+        })}));
 });
 
 router.get('/recomendations/likes',
