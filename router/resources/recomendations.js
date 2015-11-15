@@ -55,10 +55,10 @@ router.get('/recomendations/top',
         .find()
         .populate('_user')
         .then(recomendations => res.send({ posts: recomendations.sort((one, two) => {
-            if (one.weight > two.weight) {
+            if (one.weight < two.weight) {
                 return 1;
             }
-            if (one.weight < two.weight) {
+            if (one.weight > two.weight) {
                 return -1;
             }
             return 0;
