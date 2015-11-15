@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import * as authActions from '../actions/auth';
-import Navbar from '../components/navbar';
+import Navbar from './navbar';
 import LayoutContent from '../components/layoutContent';
 import MessageBar from '../components/messageBar';
 
@@ -27,7 +27,7 @@ class App extends Component {
 
     render() {
         return (
-            <div className="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+            <div className="recomea-layout-transparent mdl-layout mdl-js-layout">
                 <Navbar user={ this.props.user } />
                 <LayoutContent children={ this.props.children } />
                 { this.props.message ? <MessageBar message={ this.props.message }/> : ''}
