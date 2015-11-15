@@ -27,6 +27,12 @@
     border-top: 1px solid rgba(0,0,0,.1);
 }
 
-.mdl-navigation__link--active {
-    border-bottom: 4px solid rgba(255,64,129,1);
+.recomea-layout-transparent .mdl-navigation__link {
+    height: 60px;
+    border-bottom: 4px solid transparent;
+}
+
+.recomea-layout-transparent .mdl-navigation__link--active {
+    height: 60px;
+    border-bottom: 4px solid rgb(63, 81, 181);
 }

@@ -9,12 +9,18 @@ export default ({user}) => {
     return (
         <div className="mdl-navigation mdl-layout--large-screen-only">
             <Link to="/create">
-                <FloatingActionButton mini style={{marginRight: '10px'}}>
-                    <FontIcon className="material-icons">create</FontIcon>
-                </FloatingActionButton>
+                <button
+                    className="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored"
+                    style={{
+                        backgroundColor: 'rgb(63, 81, 181)',
+                        marginRight: '10px'
+                    }}
+                >
+                    <i className="material-icons">create</i>
+                </button>
             </Link>
             <Link to="/profile">
-                <Paper circle zDepth={2}>
+                <Paper circle zDepth={1}>
                     <Avatar
                         style={{ width: '40px', height: '40px' }}
                         src={`https://graph.facebook.com/${user.providerId}/picture?&type=large`}
