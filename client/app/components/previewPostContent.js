@@ -1,16 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router';
+import PostText from './postText';
 
-export default (props) => {
+export default ({content, _id}) => {
     return (
         <div className="mdl-card__supporting-text" style={{ width: 'auto' }}>
-            {props.linkedContent ? <Link style={{textDecoration: 'none', color: 'rgba(0,0,0, 0.87)'}} to={`/recomendation/${props._id}`}>
-                <div
-                    className="mdl-typography--display-1"
-                    style={{fontWeight: '200'}}
-                    dangerouslySetInnerHTML={{ __html: props.linkedContent}}
-                />
-            </Link> : '' }
+            <Link style={{textDecoration: 'none', color: 'rgba(0,0,0, 0.87)'}} to={ `/recomendation/${_id}` }>
+                <PostText content={ content }/>
+            </Link>
         </div>
     );
 };

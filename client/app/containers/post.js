@@ -3,8 +3,9 @@ import { fetchPost } from '../actions/post';
 import PostHeader from '../components/postHeader';
 import PostShare from '../components/postShare';
 import PostContent from '../components/postContent';
-import { connect } from 'react-redux';
+import PreviewPostActions from '../components/previewPostActions';
 import Loader from '../components/loader';
+import { connect } from 'react-redux';
 
 class Post extends Component {
     static propTypes = {
@@ -34,9 +35,10 @@ class Post extends Component {
         return (
             <div>{ this.props.isLoading ? <Loader /> :
                     <div style={{width: '100%'}} className="mdl-card">
-                        <PostHeader { ...this.props._user } />
+                        <PostHeader { ...this.props._user } displayDate={ this.props.displayDate } />
                         <PostShare />
                         <PostContent { ...this.props } />
+                        <PreviewPostActions { ...this.props } />
                     </div>
                 }</div>
         );

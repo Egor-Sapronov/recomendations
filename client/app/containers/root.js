@@ -7,6 +7,7 @@ import Post from '../containers/post';
 import Login from '../components/login';
 import Create from '../containers/create';
 import Next from '../containers/next';
+import Likes from '../containers/likes';
 
 import { connect } from 'react-redux';
 
@@ -40,7 +41,7 @@ class Root extends Component {
                         <Route path="profile/:id" component={ Profile } />
                         <Route path="create" component={ Create } onEnter={ this.requireAuth.bind(this) } />
                         <Route path="top" component={ EmptyComponent } onEnter={ this.requireAuth.bind(this) } />
-                        <Route path="likes" component={ EmptyComponent } onEnter={ this.requireAuth.bind(this) } />
+                        <Route path="likes" component={ Likes } onEnter={ this.requireAuth.bind(this) } />
                         <Route path="recomendation/:id" component={ Post } />
                         <Route path="login" component={ Login } />
                     </Route>

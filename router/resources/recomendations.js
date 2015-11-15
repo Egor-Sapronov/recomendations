@@ -48,6 +48,19 @@ router.get('/users/:userId/posts', (req, res) => {
         .then(recomendations => res.send({posts: recomendations}));
 });
 
+router.get('/recomendations/likes', passport.authenticate('bearer', {
+    session: false,
+}), (req,res) => {
+    return db
+        .RecomendationModel
+        .find({
+            'likes._user': req.user._id,
+            'likes.value': true,
+        })
+        .populate('_user')
+        .then(recomendations => res.send({ posts: recomendations }));
+});
+
 router.get('/recomendations/next',
 passport.authenticate('bearer', {
     session: false,
@@ -103,7 +116,6 @@ router.post('/recomendations',
     }), (req, res) => {
     const recomendation = new db.RecomendationModel({
         content: req.body.content,
-        linkedContent: autolinker.link(req.body.content),
         data: req.body.data,
         _user: req.user,
     });

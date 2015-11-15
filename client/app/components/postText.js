@@ -1,16 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router';
 
-export default (props) => {
+export default ({content}) => {
     return (
-        <div>
-            {props.linkedContent ? <Link style={{textDecoration: 'none', color: 'rgba(0,0,0, 0.87)'}} to={`/recomendation/${props._id}`}>
-                <div
-                    className="mdl-typography--display-1"
-                    style={{fontWeight: '200'}}
-                    dangerouslySetInnerHTML={{ __html: props.linkedContent}}
-                />
-            </Link> : '' }
-        </div>
+        <div
+            className="mdl-typography--display-1"
+            style={{fontWeight: '200'}}
+        >{content}</div>
     );
 };

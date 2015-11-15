@@ -58,12 +58,13 @@ class Next extends Component {
         return (
             <div>{ this.props.isLoading ? <Loader /> :
                     <div style={{width: '100%'}} className="mdl-card">
-                        <PostHeader { ...this.props._user } />
+                        <PostHeader { ...this.props._user } displayDate={ this.props.displayDate } />
                         <PostShare />
                         <PostContent { ...this.props } />
                         <PostActions
                             onLike={ this.handleLike.bind(this) }
                             onDislike={ this.handleDislike.bind(this) }
+                            likesCount={ this.props.likesCount }
                         />
                     </div>
                 }</div>

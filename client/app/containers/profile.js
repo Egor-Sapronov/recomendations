@@ -18,6 +18,14 @@ class Profile extends Component {
         super(props);
     }
 
+    componentDidMount() {
+        componentHandler.upgradeDom();
+    }
+
+    componentDidUpdate() {
+        componentHandler.upgradeDom();
+    }
+
     componentWillMount() {
         this.props.dispatch(profileActions.getProfile(this.props.params.id));
         this.props.dispatch(profileActions.getProfilePosts(this.props.params.id));

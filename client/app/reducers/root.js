@@ -6,6 +6,7 @@ import recomendation from './recomendation';
 import snack from './snack';
 import post from './post';
 import create from './create';
+import likes from './likes';
 
 const rootReducer = combineReducers({
     user,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
     snack,
     post,
     create,
+    likes,
 });
 
 export default rootReducer;

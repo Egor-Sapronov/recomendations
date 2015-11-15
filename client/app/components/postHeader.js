@@ -9,7 +9,7 @@ export default (props) => {
                 <CardHeader
                     style={{ padding: '0', height: 'auto' }}
                     title={ props.displayName }
-                    subtitle={ props.location }
+                    subtitle={ `${props.location} - ${props.displayDate}` }
                     avatar={ `https://graph.facebook.com/${props.providerId}/picture?&type=large` }
                 />
             </Link>
