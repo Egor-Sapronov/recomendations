@@ -1,9 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import FloatingActionButton from 'material-ui/lib/floating-action-button';
 import Avatar from 'material-ui/lib/avatar';
-import FontIcon from 'material-ui/lib/font-icon';
-import Paper from 'material-ui/lib/paper';
 
 export default ({user}) => {
     return (

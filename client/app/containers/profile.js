@@ -26,11 +26,6 @@ class Profile extends Component {
         componentHandler.upgradeDom();
     }
 
-    componentWillMount() {
-        this.props.dispatch(profileActions.getProfile(this.props.params.id));
-        this.props.dispatch(profileActions.getProfilePosts(this.props.params.id));
-    }
-
     render() {
         return (
             <div>{this.props.isLoading ? <Loader /> :
