@@ -17,6 +17,7 @@ router.get('/auth',
           _id: req.user._id,
         },
       })
+      .exec()
       .then(token => res.send({
         token: token.value,
         user: {

@@ -11,11 +11,8 @@ router.get('/profiles/me',
 
 router.get('/profiles/:id', (req, res) => db
     .UserModel
-    .findOne({
-        _id: req.params.id,
-    })
-    .then(user => res.send({
-        profile: user,
-    })));
+    .findOne({ _id: req.params.id })
+    .exec()
+    .then(user => res.send({ profile: user })));
 
 module.exports = router;

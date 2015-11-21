@@ -12,6 +12,7 @@ router.get('/users',
   (req, res) => {
     return db.UserModel
       .find()
+      .exec()
       .then(users => res.send({ users: users }));
   });
 

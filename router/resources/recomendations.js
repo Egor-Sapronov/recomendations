@@ -10,6 +10,7 @@ router.param('id', (req, res, next, id) => {
         .RecomendationModel
         .findById(id)
         .populate('_user')
+        .exec()
         .then(recomendation => {
             if (!recomendation) {
                 logger.error(`recomendation ${id} not found`);
@@ -37,6 +38,7 @@ passport.authenticate('bearer', {
         .RecomendationModel
         .find({_user: req.user._id})
         .populate('_user')
+        .exec()
         .then(recomendations => res.send({posts: recomendations}));
 });
 
@@ -45,6 +47,7 @@ router.get('/users/:userId/posts', (req, res) => {
         .RecomendationModel
         .find({_user: req.params._userId})
         .populate('_user')
+        .exec()
         .then(recomendations => res.send({posts: recomendations}));
 });
 
@@ -54,6 +57,7 @@ router.get('/recomendations/top',
         .RecomendationModel
         .find()
         .populate('_user')
+        .exec()
         .then(recomendations => res.send({ posts: recomendations.sort((one, two) => {
             if (one.weight < two.weight) {
                 return 1;
@@ -76,6 +80,7 @@ passport.authenticate('bearer', {
             'likes.value': true,
         })
         .populate('_user')
+        .exec()
         .then(recomendations => res.send({ posts: recomendations }));
 });
 
@@ -119,6 +124,7 @@ router.get('/recomendations', (req, res) => {
     .RecomendationModel
     .find()
     .populate('_user')
+    .exec()
     .then(recomendations => res.send({
         recomendations: recomendations,
     }));

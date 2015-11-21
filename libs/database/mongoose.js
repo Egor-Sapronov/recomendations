@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+mongoose.Promise = global.Promise;
 const UserSchema = require('./schemas/user');
 const TokenSchema = require('./schemas/token');
 const RecomendationSchema = require('./schemas/recomendation');
