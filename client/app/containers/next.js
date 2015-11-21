@@ -59,7 +59,7 @@ class Next extends Component {
             <div>{ this.props.isLoading ? <Loader /> :
                     <div style={{width: '100%'}} className="mdl-card">
                         <PostHeader { ...this.props._user } displayDate={ this.props.displayDate } />
-                        <PostShare />
+                        <PostShare { ...this.props } />
                         <PostContent { ...this.props } />
                         <PostActions
                             onLike={ this.handleLike.bind(this) }

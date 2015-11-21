@@ -19,6 +19,7 @@ module.exports = {
         new webpack.DefinePlugin({
             'process.env': {
                 NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+                APP_HOST: JSON.stringify(process.env.APP_HOST),
             },
         }),
     ],
@@ -27,12 +28,13 @@ module.exports = {
             {
                 test: /\.css$/,
                 loader: ExtractTextPlugin.extract('style-loader', 'css-loader'),
-            },
-            {
+            }, {
                 test: /\.js$/,
                 exclude: /(node_modules)/,
                 loader: 'babel-loader',
-            },
-        ],
+            }, {
+                test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
+                loader: 'file-loader',
+            }],
     },
 };
