@@ -2,6 +2,7 @@ import React from 'react';
 import PostHeader from './postHeader';
 import PreviewPostContent from './previewPostContent';
 import PostShare from './postShare';
+import Embed from './embed';
 import PreviewPostActions from './previewPostActions';
 
 export default (props) => {
