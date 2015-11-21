@@ -1,5 +1,4 @@
 import React, {Component, PropTypes} from 'react';
-import { fetchPost } from '../actions/post';
 import PostHeader from '../components/postHeader';
 import PostShare from '../components/postShare';
 import PostContent from '../components/postContent';
@@ -17,10 +16,6 @@ class Post extends Component {
 
     constructor(props) {
         super(props);
-    }
-
-    componentWillMount() {
-        this.props.dispatch(fetchPost(this.props.params.id));
     }
 
     componentDidMount() {

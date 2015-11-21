@@ -1,5 +1,4 @@
 import React, {Component, PropTypes} from 'react';
-import { fetchLikes } from '../actions/likes';
 import PostHeader from '../components/postHeader';
 import PostShare from '../components/postShare';
 import PostContent from '../components/postContent';
@@ -14,10 +13,6 @@ class Likes extends Component {
 
     constructor(props) {
         super(props);
-    }
-
-    componentWillMount() {
-        this.props.dispatch(fetchLikes());
     }
 
     componentDidMount() {

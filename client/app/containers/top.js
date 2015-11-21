@@ -1,5 +1,4 @@
 import React, {Component, PropTypes} from 'react';
-import { fetchTop } from '../actions/top';
 import PostHeader from '../components/postHeader';
 import PostShare from '../components/postShare';
 import PostContent from '../components/postContent';
@@ -14,10 +13,6 @@ class Top extends Component {
 
     constructor(props) {
         super(props);
-    }
-
-    componentWillMount() {
-        this.props.dispatch(fetchTop());
     }
 
     componentDidMount() {

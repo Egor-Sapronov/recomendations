@@ -1,5 +1,4 @@
 import React, {Component, PropTypes} from 'react';
-import * as profileActions from '../actions/profile';
 import {connect} from 'react-redux';
 import ProfileAvatar from '../components/profileAvatar';
 import ProfileDisplayName from '../components/profileDisplayName';

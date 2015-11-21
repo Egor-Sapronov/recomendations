@@ -9,9 +9,14 @@ import Create from '../containers/create';
 import Next from '../containers/next';
 import Likes from '../containers/likes';
 import Top from './top';
-import * as profileActions from '../actions/profile';
+import { getProfile, getProfilePosts } from '../actions/profile';
+import { fetchTop } from '../actions/top';
+import { fetchLikes } from '../actions/likes';
+import { fetchPost } from '../actions/post';
 
 import isAuthenticated from './auth';
+
+import { autobind } from 'core-decorators';
 
 import { connect } from 'react-redux';
 
@@ -27,12 +32,27 @@ class Root extends Component {
 
     constructor(props) {
         super(props);
-        this.handleProfile = this.handleProfile.bind(this);
     }
 
-    handleProfile(nextState, replaceState) {
-        this.props.dispatch(profileActions.getProfile(nextState.params.id));
-        this.props.dispatch(profileActions.getProfilePosts(nextState.params.id));
+    @autobind
+    handleProfile(nextState) {
+        this.props.dispatch(getProfile(nextState.params.id));
+        this.props.dispatch(getProfilePosts(nextState.params.id));
+    }
+
+    @autobind
+    handleTop() {
+        this.props.dispatch(fetchTop());
+    }
+
+    @autobind
+    handleLikes() {
+        this.props.dispatch(fetchLikes());
+    }
+
+    @autobind
+    handlePost(nextState) {
+        this.props.dispatch(fetchPost(nextState.params.id));
     }
 
     render() {
@@ -40,14 +60,34 @@ class Root extends Component {
             <div>
                 <Router history={ history } >
                     <Route path="/" component={ App } >
-                        <IndexRoute component={isAuthenticated(Next) } />
-                        <Route path="profile" component={ isAuthenticated(Profile) } onEnter={ this.handleProfile } />
-                        <Route path="profile/:id" component={ Profile } onEnter={ this.handleProfile } />
-                        <Route path="create" component={ isAuthenticated(Create) } />
-                        <Route path="top" component={ isAuthenticated(Top) } />
-                        <Route path="likes" component={ isAuthenticated(Likes) } />
-                        <Route path="recomendation/:id" component={ Post } />
-                        <Route path="login" component={ Login } />
+                        <IndexRoute
+                            component={isAuthenticated(Next) } />
+                        <Route
+                            path="profile"
+                            component={ isAuthenticated(Profile) }
+                            onEnter={ this.handleProfile } />
+                        <Route
+                            path="profile/:id"
+                            component={ Profile }
+                            onEnter={ this.handleProfile } />
+                        <Route
+                            path="create"
+                            component={ isAuthenticated(Create) } />
+                        <Route
+                            path="top"
+                            component={ isAuthenticated(Top) }
+                            onEnter={ this.handleTop } />
+                        <Route
+                            path="likes"
+                            component={ isAuthenticated(Likes) }
+                            onEnter={ this.handleLikes } />
+                        <Route
+                            path="recomendation/:id"
+                            component={ Post }
+                            onEnter={ this.handlePost } />
+                        <Route
+                            path="login"
+                            component={ Login } />
                     </Route>
                 </Router>
             </div>
