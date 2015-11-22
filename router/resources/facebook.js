@@ -9,7 +9,7 @@ passport.authenticate('facebook', {
 
 router.get('/facebook/callback',
 passport.authenticate('facebook', {
-    session: true
+    session: true,
 }), (req, res) => {
     return res.redirect('/');
 });

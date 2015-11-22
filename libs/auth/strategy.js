@@ -21,7 +21,6 @@ function assignToken(user, facebookToken) {
 }
 
 function facebook(accessToken, refreshToken, profile, done) {
-    console.log(profile);
     return UserModel
     .findOne({ providerId: profile.id })
     .then(user=> {
@@ -56,41 +55,6 @@ function facebook(accessToken, refreshToken, profile, done) {
     });
 }
 
-function local(username, password, done) {
-    return UserModel
-    .findOne({
-        email: username,
-    })
-    .then(user => {
-        if (!user) {
-            return done(null, false);
-        }
-
-        if (user.checkPassword(password)) {
-            return TokenModel
-            .find()
-            .populate({
-                path: '_user',
-                match: {
-                    _id: user._id,
-                },
-            })
-            .remove(err=> {
-                if (err) {
-                    return done(err);
-                }
-
-                return assignToken(user)
-                .then(result=> {
-                    return done(null, result);
-                });
-            });
-        }
-
-        return done(null, false);
-    });
-}
-
 function bearer(token, done) {
     return TokenModel
     .findOne({
@@ -107,8 +71,6 @@ function bearer(token, done) {
 }
 
 module.exports = {
-    local: local,
     bearer: bearer,
-    basic: local,
     facebook: facebook,
 };

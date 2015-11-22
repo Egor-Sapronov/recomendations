@@ -1,5 +1,5 @@
 import React from 'react';
-import { FacebookButton, TwitterButton } from "react-social";
+import { FacebookButton, TwitterButton } from 'react-social';
 
 export default ({_id, content}) => {
     const url = `${process.env.APP_HOST}/recomendation/${_id}`;
@@ -12,7 +12,7 @@ export default ({_id, content}) => {
                 className="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
                 htmlFor={ `card_menu${_id}` }
             >
-                <a href={url} target="_blank" style={{textDecoration: "none"}}>
+                <a href={url} target="_blank" style={{textDecoration: 'none'}}>
                     <li className="mdl-menu__item">
                         <i className="icon-link" style={{marginRight: '5px'}} />
                         Link

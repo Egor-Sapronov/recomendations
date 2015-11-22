@@ -6,8 +6,6 @@ const db = require('../libs/database/mongoose');
 router.use('/', facebook);
 router.use('/api', api);
 
-// router.get('/login', (req, res) => res.render('index'));
-
 router.get('*', (req, res) => {
     if (!req.user) {
         return res.render('index');
