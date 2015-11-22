@@ -23,7 +23,7 @@ export default class Navbar extends Component {
                     <span className="mdl-layout-title">Recomea</span>
                     {this.props.auth.isAuthenticated ? <NavLinks /> : ''}
                     <div className="mdl-layout-spacer" />
-                    {this.props.auth.isAuthenticated ? <NavProfile {...this.props} /> : <FacebookButton />}
+                    {this.props.auth.isAuthenticated ? <NavProfile {...this.props} /> : <FacebookButton name="log in" />}
                 </div>
             </header>
         );
