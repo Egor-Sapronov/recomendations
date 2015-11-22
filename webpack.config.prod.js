@@ -25,6 +25,7 @@ module.exports = {
             'process.env': {
                 NODE_ENV: JSON.stringify(process.env.NODE_ENV),
                 APP_HOST: JSON.stringify(process.env.APP_HOST),
+                FEATURED_POST: JSON.stringify(process.env.FEATURED_POST),
             },
         }),
     ],

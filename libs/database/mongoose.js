@@ -16,7 +16,7 @@ function initDb() {
 
         db.on('error', err => reject(err));
         db.on('open', () => {
-            if (process.env.NODE_ENV !== 'production') {
+            if (process.env.DROP_DATABASE) {
                 mongoose.connection.db.dropDatabase(() => {});
             }
             return resolve(db);

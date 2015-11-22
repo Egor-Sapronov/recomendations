@@ -1,4 +1,5 @@
 import React from 'react';
+import Featured from '../containers/featured';
 
 export default () => {
     return (
@@ -20,6 +21,9 @@ export default () => {
                     signin with facebook
                 </a>
                 <div className="mdl-layout-spacer" />
+            </div>
+            <div className="mdl-grid">
+                <Featured id={`${process.env.FEATURED_POST}`} />
             </div>
         </div>
     );
