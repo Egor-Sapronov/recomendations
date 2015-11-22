@@ -37,6 +37,8 @@
 .recomea-layout-transparent .mdl-layout__header {
     background-color: transparent;
 }
+
+.recomea-layout-transparent .mdl-layout__drawer-button,
 .recomea-layout-transparent .mdl-layout__header,
 .recomea-layout-transparent .mdl-navigation__link {
     color: #424242;

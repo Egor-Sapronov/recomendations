@@ -4,6 +4,7 @@ import * as authActions from '../actions/auth';
 import Navbar from './navbar';
 import LayoutContent from '../components/layoutContent';
 import MessageBar from '../components/messageBar';
+import MobileNav from '../components/mobileNav';
 
 class App extends Component {
     static propTypes = {
@@ -27,8 +28,9 @@ class App extends Component {
 
     render() {
         return (
-            <div className="recomea-layout-transparent mdl-layout mdl-js-layout">
+            <div className="recomea-layout-transparent mdl-layout mdl-js-layout mdl-layout--fixed-header">
                 <Navbar user={ this.props.user } />
+                <MobileNav user={ this.props.user } auth={ this.props.auth } />
                 <LayoutContent children={ this.props.children } />
                 { this.props.message ? <MessageBar message={ this.props.message }/> : ''}
             </div>
@@ -39,6 +41,7 @@ class App extends Component {
 function select(state) {
     return {
         user: state.user,
+        auth: state.auth,
         message: state.snack.message,
     };
 }

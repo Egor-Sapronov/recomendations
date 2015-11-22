@@ -4,7 +4,7 @@ import Avatar from 'material-ui/lib/avatar';
 
 export default ({user}) => {
     return (
-        <div className="mdl-navigation mdl-layout--large-screen-only">
+        <div className="mdl-navigation">
             <Link to="/create">
                 <button
                     className="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored"
