@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import NavLinks from '../components/navLinks';
 import NavProfile from '../components/navProfile';
 import { connect } from 'react-redux';
-
+import FacebookButton from '../components/facebookButton';
 export default class Navbar extends Component {
     constructor(props) {
         super(props);
@@ -23,7 +23,7 @@ export default class Navbar extends Component {
                     <span className="mdl-layout-title">Recomea</span>
                     {this.props.auth.isAuthenticated ? <NavLinks /> : ''}
                     <div className="mdl-layout-spacer" />
-                    {this.props.auth.isAuthenticated ? <NavProfile {...this.props} /> : ''}
+                    {this.props.auth.isAuthenticated ? <NavProfile {...this.props} /> : <FacebookButton />}
                 </div>
             </header>
         );

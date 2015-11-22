@@ -34,9 +34,9 @@ export function getPostsFailure(error) {
 }
 
 export const getProfilePosts = (id) => (dispatch) => {
-    dispatch(getPostsStart(id));
+    dispatch(getPostsStart());
     return api
-        .profilePosts()
+        .profilePosts(id)
         .then(posts => dispatch(getPostsSuccess(posts)))
         .catch(error => dispatch(getPostsFailure(error)));
 };

@@ -45,7 +45,7 @@ passport.authenticate('bearer', {
 router.get('/users/:userId/posts', (req, res) => {
     return db
         .RecomendationModel
-        .find({_user: req.params._userId})
+        .find({_user: req.params.userId})
         .populate('_user')
         .exec()
         .then(recomendations => res.send({posts: recomendations}));
