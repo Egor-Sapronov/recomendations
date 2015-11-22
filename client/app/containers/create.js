@@ -6,6 +6,7 @@ import TextField from 'material-ui/lib/text-field';
 import Preview from '../components/preview';
 import { debounce } from 'core-decorators';
 import CreateButton from '../components/createButton';
+import getUrls from 'get-urls';
 
 export class CreateRecomendation extends Component {
     static propTypes() {
@@ -28,7 +29,10 @@ export class CreateRecomendation extends Component {
         this.setState({
             content: target.value,
         }, () => {
-            this.props.dispatch(createActions.preview(this.state.content));
+            const urls = getUrls(this.state.content);
+            if (urls.length > 0) {
+                this.props.dispatch(createActions.preview(urls));
+            }
         });
     }
 

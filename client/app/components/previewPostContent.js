@@ -9,8 +9,11 @@ export default ({content, _id, data}) => {
                 <PostText content={ content }/>
                 {data.map(item => {
                     return (
-                        <div>
-                            {item.thumbnail_url ? <img style={{maxWidth:'100%', height: 'auto'}} src={item.thumbnail_url} /> : '' }
+                        <div key={item._id}>
+                            {(item.thumbnail_url && !item.html) ? <img style={{maxWidth:'100%', height: 'auto'}} src={item.thumbnail_url} /> : '' }
+                            <div>
+                                {item.html ? <div className="responsive-object" dangerouslySetInnerHTML={{ __html: item.html }} /> : ''}
+                            </div>
                         </div>
                     );
                 })}

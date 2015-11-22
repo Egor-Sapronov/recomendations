@@ -33,11 +33,11 @@ export function previewFailure(error) {
     };
 }
 
-export function preview(content) {
+export function preview(urls) {
     return (dispatch) => {
         dispatch(previewStart());
         return api
-            .getPreview(content)
+            .getPreview(urls)
             .then(data => dispatch(previewSuccess(data)))
             .catch(error => dispatch(previewFailure(error)));
     };

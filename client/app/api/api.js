@@ -56,7 +56,7 @@ export const api = {
         .then(response => response.user);
     },
     getPreview(content) {
-        return request(`${URL.preview}?preview=${encodeURI(content)}`, {
+        return request(`${URL.preview}?urls=${JSON.stringify(content)}`, {
             method: 'GET',
             headers: getHeaders(),
         })
