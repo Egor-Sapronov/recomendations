@@ -1,3 +1,23 @@
+.logo-font {
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  line-height: 1;
+  color: #767777;
+  font-weight: 200;
+}
+
+.logo-slogan {
+  color: #424242;
+  font-size: 60px;
+  padding-top: 160px;
+}
+
+.logo-sub-slogan {
+  font-size: 21px;
+  padding-top: 24px;
+  padding-bottom: 40px;
+  font-weight: 400;
+}
+
 .responsive-object {
   position: relative;
   padding-bottom: 56.25%;
@@ -35,4 +55,19 @@
 .recomea-layout-transparent .mdl-navigation__link--active {
     height: 60px;
     border-bottom: 4px solid rgb(63, 81, 181);
+}
+
+/**** Mobile layout ****/
+@media (max-width: 900px) {
+  .logo-slogan {
+    font-size: 26px;
+    margin: 0 16px;
+    padding-top: 24px;
+  }
+
+  .logo-sub-slogan {
+    font-size: 16px;
+    margin: 0 16px;
+    padding-top: 8px;
+  }
 }
