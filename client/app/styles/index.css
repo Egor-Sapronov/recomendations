@@ -62,7 +62,7 @@
 /**** Mobile layout ****/
 @media (max-width: 900px) {
   .logo-slogan {
-    font-size: 26px;
+    font-size: 34px;
     margin: 0 16px;
     padding-top: 24px;
   }
