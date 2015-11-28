@@ -13,16 +13,9 @@ import { getProfile, getProfilePosts } from '../actions/profile';
 import { fetchTop } from '../actions/top';
 import { fetchLikes } from '../actions/likes';
 import { fetchPost } from '../actions/post';
-
 import isAuthenticated from './auth';
-
 import { autobind } from 'core-decorators';
-
 import { connect } from 'react-redux';
-
-const EmptyComponent = () => {
-    return <div />;
-};
 
 class Root extends Component {
     static propTypes = {

@@ -5,6 +5,7 @@ import PostContent from '../components/postContent';
 import PreviewPostActions from '../components/previewPostActions';
 import Loader from '../components/loader';
 import { connect } from 'react-redux';
+import PostMeta from '../components/postMeta';
 
 class Post extends Component {
     static propTypes = {
@@ -12,6 +13,7 @@ class Post extends Component {
         params: PropTypes.object,
         _user: PropTypes.object,
         isLoading: PropTypes.bool,
+        content: PropTypes.string,
     }
 
     constructor(props) {
@@ -30,6 +32,11 @@ class Post extends Component {
         return (
             <div>{ this.props.isLoading ? <Loader /> :
                     <div style={{width: '100%'}} className="mdl-card">
+                        <PostMeta
+                            url={`${process.env.APP_HOST}/recomendation/${this.props._id}`}
+                            description={ this.props.content }
+                            image={ this.props.data[0].thumbnail_url }
+                        />
                         <PostHeader { ...this.props._user } displayDate={ this.props.displayDate } />
                         <PostShare { ...this.props } />
                         <PostContent { ...this.props } />

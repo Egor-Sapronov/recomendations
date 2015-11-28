@@ -2,8 +2,6 @@ const router = require('express').Router();
 const db = require('../../libs/database/mongoose');
 const logger = require('../../libs/logger/logger')('api::recomendations');
 const passport = require('../../libs/auth/auth');
-const getUrls = require('get-urls');
-const autolinker = require('autolinker');
 
 router.param('id', (req, res, next, id) => {
     return db
